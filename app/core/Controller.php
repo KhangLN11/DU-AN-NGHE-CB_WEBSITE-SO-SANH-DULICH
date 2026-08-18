@@ -5,33 +5,53 @@ class Controller
     protected function view(
         string $view,
         array $data = [],
-        string $layout = 'layouts/main'
+        string $layout = 'main'
     ): void {
-        $viewPath = __DIR__ . '/../views/' . $view . '.php';
-        $layoutPath = __DIR__ . '/../views/' . $layout . '.php';
+        extract($data);
 
-        if (!file_exists($viewPath)) {
-            throw new Exception('Không tìm thấy view: ' . $view);
+        $viewFile =
+            __DIR__
+            . '/../views/'
+            . $view
+            . '.php';
+
+        if (!file_exists($viewFile)) {
+            throw new Exception(
+                'View không tồn tại: '
+                . $view
+            );
         }
-
-        if (!file_exists($layoutPath)) {
-            throw new Exception('Không tìm thấy layout: ' . $layout);
-        }
-
-        extract($data, EXTR_SKIP);
 
         ob_start();
 
-        require $viewPath;
+        require $viewFile;
 
         $content = ob_get_clean();
 
-        require $layoutPath;
+        $layoutFile =
+            __DIR__
+            . '/../views/layouts/'
+            . $layout
+            . '.php';
+
+        if (!file_exists($layoutFile)) {
+            throw new Exception(
+                'Layout không tồn tại: '
+                . $layout
+            );
+        }
+
+        require $layoutFile;
     }
 
-    protected function redirect(string $path): void
-    {
-        header('Location: ' . base_url($path));
+    protected function redirect(
+        string $path = ''
+    ): never {
+        header(
+            'Location: '
+            . base_url($path)
+        );
+
         exit;
     }
 }

@@ -94,3 +94,8 @@ $router->post(
     '/contact',
     ['ContactController', 'store']
 );
+
+$router->get(
+    '/admin',
+    ['AdminController', 'dashboard']
+);

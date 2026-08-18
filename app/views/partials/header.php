@@ -155,6 +155,9 @@ $compareCount = count(
                 method="POST"
             >
 
+            <a class="admin-access-button"href="<?= base_url('admin') ?>">
+                    Quản trị
+            </a>
                 <button
                     class="logout-button"
                     type="submit"

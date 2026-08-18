@@ -505,3 +505,16 @@ img {
     height: 100%;
     object-fit: cover;
 }
+
+.admin-access-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 38px;
+    padding: 0 13px;
+    border-radius: 9px;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+}
