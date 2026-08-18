@@ -129,3 +129,13 @@ $router->post(
     '/admin/tours/{id}/delete',
     ['AdminTourController', 'delete']
 );
+
+$router->get(
+    '/admin/tours/{id}/locations',
+    ['AdminTourController', 'locations']
+);
+
+$router->post(
+    '/admin/tours/{id}/locations',
+    ['AdminTourController', 'updateLocations']
+);

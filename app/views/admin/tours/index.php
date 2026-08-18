@@ -570,6 +570,17 @@ $hasFilters =
                                             Xem
                                         </a>
 
+<a
+    class="admin-action-button locations"
+    href="<?= base_url(
+        'admin/tours/'
+        . $tour['tour_id']
+        . '/locations'
+    ) ?>"
+>
+    Điểm đến
+</a>
+
                                         <a
                                             class="admin-action-button edit"
                                             href="<?= base_url(

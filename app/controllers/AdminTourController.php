@@ -1001,4 +1001,298 @@ class AdminTourController extends AdminBaseController
         'admin/tours'
     );
     }
+
+    public function locations(string $id): void
+{
+    $this->requireAdmin();
+
+    $tourId = $this->positiveInt($id);
+
+    if ($tourId === 0) {
+        $this->notFound();
+    }
+
+    $tourModel = new AdminTour();
+
+    $tour = $tourModel->findById(
+        $tourId
+    );
+
+    if ($tour === null) {
+        $this->notFound();
+    }
+
+    $availableLocations =
+        $tourModel->getAvailableLocations();
+
+    $tourLocations =
+        $tourModel->getTourLocations(
+            $tourId
+        );
+
+    $successMessage =
+        $_SESSION['admin_tour_location_success']
+        ?? null;
+
+    unset(
+        $_SESSION['admin_tour_location_success']
+    );
+
+    $errorMessage =
+    $_SESSION['admin_tour_location_error']
+    ?? null;
+    unset( $_SESSION['admin_tour_location_error']);
+
+    $this->view(
+        'admin/tours/locations',
+        [
+            'title' =>
+                'Điểm đến Tour - TourCompare Admin',
+
+            'styles' => [
+                'css/admin.css',
+                'css/admin-tour-locations.css'
+            ],
+
+            'tourId' => $tourId,
+
+            'tour' => $tour,
+
+            'availableLocations' =>
+                $availableLocations,
+
+            'tourLocations' =>
+                $tourLocations,
+
+            'errors' => [],
+
+            'successMessage' =>
+                $successMessage,
+
+            'errorMessage' =>
+                $errorMessage
+        ],
+        'admin'
+    );
+    }
+
+    public function updateLocations(
+    string $id
+): void {
+    $this->requireAdmin();
+
+    $tourId = $this->positiveInt($id);
+
+    if ($tourId === 0) {
+        $this->notFound();
+    }
+
+    $tourModel = new AdminTour();
+
+    $tour = $tourModel->findById(
+        $tourId
+    );
+
+    if ($tour === null) {
+        $this->notFound();
+    }
+
+    $locationIds =
+        $_POST['location_id']
+        ?? [];
+
+    $sortOrders =
+        $_POST['sort_order']
+        ?? [];
+
+    $notes =
+        $_POST['note']
+        ?? [];
+
+    if (!is_array($locationIds)) {
+        $locationIds = [];
+    }
+
+    if (!is_array($sortOrders)) {
+        $sortOrders = [];
+    }
+
+    if (!is_array($notes)) {
+        $notes = [];
+    }
+
+    $errors = [];
+    $locations = [];
+    $usedLocationIds = [];
+
+    foreach (
+        $locationIds
+        as $index => $rawLocationId
+    ) {
+        $locationId =
+            $this->positiveInt(
+                $rawLocationId
+            );
+
+        $sortOrder =
+            $this->positiveInt(
+                $sortOrders[$index]
+                ?? null
+            );
+
+        $note = trim(
+            $notes[$index]
+            ?? ''
+        );
+
+        if ($locationId === 0) {
+            continue;
+        }
+
+        if (
+            !$tourModel->locationExists(
+                $locationId
+            )
+        ) {
+            $errors[] =
+                'Có địa điểm không hợp lệ.';
+
+            continue;
+        }
+
+        if (
+            in_array(
+                $locationId,
+                $usedLocationIds,
+                true
+            )
+        ) {
+            $errors[] =
+                'Một địa điểm không được chọn hai lần.';
+
+            continue;
+        }
+
+        if ($sortOrder === 0) {
+            $errors[] =
+                'Thứ tự điểm đến phải lớn hơn 0.';
+
+            continue;
+        }
+
+        if (
+            mb_strlen($note) > 500
+        ) {
+            $errors[] =
+                'Ghi chú điểm đến không được vượt quá 500 ký tự.';
+
+            continue;
+        }
+
+        $usedLocationIds[] =
+            $locationId;
+
+        $locations[] = [
+            'location_id' =>
+                $locationId,
+
+            'sort_order' =>
+                $sortOrder,
+
+            'note' =>
+                $note !== ''
+                    ? $note
+                    : null
+        ];
+    }
+
+    if (!empty($errors)) {
+        $this->view(
+            'admin/tours/locations',
+            [
+                'title' =>
+                    'Điểm đến Tour - TourCompare Admin',
+
+                'styles' => [
+                    'css/admin.css',
+                    'css/admin-tour-locations.css'
+                ],
+
+                'tourId' =>
+                    $tourId,
+
+                'tour' =>
+                    $tour,
+
+                'availableLocations' =>
+                    $tourModel
+                        ->getAvailableLocations(),
+
+                'tourLocations' =>
+                    $locations,
+
+                'errors' =>
+                    array_values(
+                        array_unique(
+                            $errors
+                        )
+                    ),
+
+                'successMessage' =>
+                    null
+            ],
+            'admin'
+        );
+
+        return;
+    }
+
+    usort(
+        $locations,
+        function (
+            array $a,
+            array $b
+        ) {
+            return
+                $a['sort_order']
+                <=>
+                $b['sort_order'];
+        }
+    );
+
+    foreach (
+        $locations
+        as $index => &$location
+    ) {
+        $location['sort_order'] =
+            $index + 1;
+    }
+
+    unset($location);
+
+    try {
+        $tourModel->updateTourLocations(
+            $tourId,
+            $locations
+        );
+
+        $_SESSION[
+            'admin_tour_location_success'
+        ] =
+            'Đã cập nhật điểm đến cho Tour #'
+            . $tourId
+            . ' thành công.';
+    } catch (Throwable $error) {
+        $_SESSION[
+            'admin_tour_location_error'
+        ] =
+            'Không thể cập nhật điểm đến.';
+    }
+
+    $this->redirect(
+        'admin/tours/'
+        . $tourId
+        . '/locations'
+    );
+    }
 }

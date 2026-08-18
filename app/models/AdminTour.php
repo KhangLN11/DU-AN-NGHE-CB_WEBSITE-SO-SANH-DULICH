@@ -931,4 +931,89 @@ public function createTour(array $data): int
 
     return $stmt->fetchAll();
     }
+
+    public function updateTourLocations(
+    int $tourId,
+    array $locations
+): bool {
+    try {
+        $this->db->beginTransaction();
+
+        $deleteStmt = $this->db->prepare("
+            DELETE FROM tour_locations
+            WHERE tour_id = :tour_id
+        ");
+
+        $deleteStmt->bindValue(
+            ':tour_id',
+            $tourId,
+            PDO::PARAM_INT
+        );
+
+        $deleteStmt->execute();
+
+        if (!empty($locations)) {
+            $insertStmt = $this->db->prepare("
+                INSERT INTO tour_locations (
+                    tour_id,
+                    location_id,
+                    sort_order,
+                    note
+                )
+                VALUES (
+                    :tour_id,
+                    :location_id,
+                    :sort_order,
+                    :note
+                )
+            ");
+
+            foreach ($locations as $location) {
+                $insertStmt->bindValue(
+                    ':tour_id',
+                    $tourId,
+                    PDO::PARAM_INT
+                );
+
+                $insertStmt->bindValue(
+                    ':location_id',
+                    $location['location_id'],
+                    PDO::PARAM_INT
+                );
+
+                $insertStmt->bindValue(
+                    ':sort_order',
+                    $location['sort_order'],
+                    PDO::PARAM_INT
+                );
+
+                if ($location['note'] === null) {
+                    $insertStmt->bindValue(
+                        ':note',
+                        null,
+                        PDO::PARAM_NULL
+                    );
+                } else {
+                    $insertStmt->bindValue(
+                        ':note',
+                        $location['note'],
+                        PDO::PARAM_STR
+                    );
+                }
+
+                $insertStmt->execute();
+            }
+        }
+
+        $this->db->commit();
+
+        return true;
+    } catch (Throwable $error) {
+        if ($this->db->inTransaction()) {
+            $this->db->rollBack();
+        }
+
+        throw $error;
+    }
+    }
 }

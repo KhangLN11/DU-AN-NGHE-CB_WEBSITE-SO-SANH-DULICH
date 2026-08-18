@@ -1,0 +1,330 @@
+.admin-location-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.admin-location-heading-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-location-secondary,
+.admin-location-back {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 13px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-location-secondary {
+    background: #f0fdfa;
+    color: #0f766e;
+}
+
+.admin-location-back {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-location-alert {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.admin-location-alert.success {
+    border: 1px solid #a7f3d0;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.admin-location-alert.error {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.admin-location-guide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 20px;
+    padding: 18px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.admin-location-guide > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-location-guide span {
+    color: #0f766e;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-location-guide strong {
+    margin-top: 2px;
+    color: #334155;
+    font-size: 13px;
+}
+
+.admin-location-guide p {
+    max-width: 560px;
+    color: #64748b;
+    font-size: 10px;
+}
+
+.admin-location-form {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.admin-location-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-location-toolbar > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-location-toolbar span {
+    color: #94a3b8;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-location-toolbar strong {
+    color: #334155;
+    font-size: 12px;
+}
+
+.admin-add-location {
+    min-height: 38px;
+    padding: 0 13px;
+    border: 0;
+    border-radius: 8px;
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-location-rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-location-row {
+    display: grid;
+    grid-template-columns:
+        58px
+        minmax(180px, 1fr)
+        90px
+        minmax(180px, 1fr)
+        auto;
+    align-items: end;
+    gap: 12px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-location-order {
+    display: flex;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 9px;
+    background: #f0fdfa;
+}
+
+.admin-location-order span {
+    color: #94a3b8;
+    font-size: 7px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-location-order strong {
+    color: #0f766e;
+    font-size: 13px;
+}
+
+.admin-location-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-location-field label {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-location-field select,
+.admin-location-field input {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    outline: 0;
+    background: #ffffff;
+    color: #334155;
+    font-size: 10px;
+}
+
+.admin-location-field select:focus,
+.admin-location-field input:focus {
+    border-color: #14b8a6;
+    box-shadow:
+        0 0 0 3px
+        rgba(20, 184, 166, 0.1);
+}
+
+.admin-remove-location {
+    height: 40px;
+    padding: 0 11px;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #dc2626;
+    font-size: 9px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-remove-location:hover {
+    background: #fef2f2;
+}
+
+.admin-location-empty {
+    padding: 55px 25px;
+    color: #94a3b8;
+    font-size: 10px;
+    text-align: center;
+}
+
+.admin-location-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 9px;
+    padding: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.admin-location-actions a,
+.admin-location-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 41px;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-location-actions a {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-location-actions button {
+    border: 0;
+    background: #0f766e;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+@media (max-width: 950px) {
+    .admin-location-row {
+        grid-template-columns:
+            55px
+            minmax(0, 1fr)
+            80px;
+    }
+
+    .note-field {
+        grid-column: 2 / 4;
+    }
+
+    .admin-remove-location {
+        grid-column: 2 / 4;
+    }
+}
+
+@media (max-width: 650px) {
+    .admin-location-heading,
+    .admin-location-guide,
+    .admin-location-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-location-heading-actions {
+        width: 100%;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-location-secondary,
+    .admin-location-back,
+    .admin-add-location {
+        width: 100%;
+    }
+
+    .admin-location-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-location-order {
+        width: 55px;
+    }
+
+    .note-field,
+    .admin-remove-location {
+        grid-column: auto;
+    }
+
+    .admin-location-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .admin-location-actions a,
+    .admin-location-actions button {
+        width: 100%;
+    }
+}
