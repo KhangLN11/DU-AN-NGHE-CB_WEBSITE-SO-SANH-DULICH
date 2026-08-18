@@ -84,3 +84,13 @@ $router->post(
     '/favorites/remove',
     ['FavoriteController', 'remove']
 );
+
+$router->get(
+    '/contact',
+    ['ContactController', 'index']
+);
+
+$router->post(
+    '/contact',
+    ['ContactController', 'store']
+);
