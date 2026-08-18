@@ -12,6 +12,11 @@ $pageScripts =
     $scripts
     ?? [];
 
+$currentPath = parse_url(
+    $_SERVER['REQUEST_URI'] ?? '',
+    PHP_URL_PATH
+);
+
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +47,9 @@ $pageScripts =
 
     <?php foreach ($pageStyles as $style): ?>
 
-        <?php if ($style !== 'css/admin.css'): ?>
+        <?php if (
+            $style !== 'css/admin.css'
+        ): ?>
 
             <link
                 rel="stylesheet"
@@ -76,15 +83,30 @@ $pageScripts =
             <nav class="admin-navigation">
 
                 <a
-                    class="active"
+                    class="<?= str_ends_with(
+                        $currentPath,
+                        '/admin'
+                    )
+                        ? 'active'
+                        : '' ?>"
                     href="<?= base_url('admin') ?>"
                 >
                     Tổng quan
                 </a>
 
-                <span>
+                <a
+                    class="<?= str_contains(
+                        $currentPath,
+                        '/admin/tours'
+                    )
+                        ? 'active'
+                        : '' ?>"
+                    href="<?= base_url(
+                        'admin/tours'
+                    ) ?>"
+                >
                     Tour
-                </span>
+                </a>
 
                 <span>
                     Danh mục
@@ -136,14 +158,18 @@ $pageScripts =
 
                         <strong>
                             <?= e(
-                                $_SESSION['user_name']
+                                $_SESSION[
+                                    'user_name'
+                                ]
                                 ?? 'Admin'
                             ) ?>
                         </strong>
 
                         <span>
                             <?= e(
-                                $_SESSION['user_email']
+                                $_SESSION[
+                                    'user_email'
+                                ]
                                 ?? ''
                             ) ?>
                         </span>
@@ -151,7 +177,9 @@ $pageScripts =
                     </div>
 
                     <form
-                        action="<?= base_url('logout') ?>"
+                        action="<?= base_url(
+                            'logout'
+                        ) ?>"
                         method="POST"
                     >
 
@@ -178,12 +206,21 @@ $pageScripts =
 
     </div>
 
-    <script src="<?= asset('js/app.js') ?>"></script>
+    <script
+        src="<?= asset(
+            'js/app.js'
+        ) ?>"
+    ></script>
 
-    <?php foreach ($pageScripts as $script): ?>
+    <?php foreach (
+        $pageScripts
+        as $script
+    ): ?>
 
         <script
-            src="<?= asset($script) ?>"
+            src="<?= asset(
+                $script
+            ) ?>"
         ></script>
 
     <?php endforeach; ?>

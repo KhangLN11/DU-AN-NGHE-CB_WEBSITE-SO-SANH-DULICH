@@ -1,0 +1,244 @@
+.admin-form-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.admin-back-button {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-back-button:hover {
+    border-color: #99f6e4;
+    color: #0f766e;
+}
+
+.admin-tour-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-form-section {
+    overflow: hidden;
+    padding: 28px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.admin-form-section-heading {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    align-items: start;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.admin-form-section-heading > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-form-section-heading h2 {
+    margin-bottom: 3px;
+    color: #111827;
+    font-size: 18px;
+}
+
+.admin-form-section-heading p {
+    color: #94a3b8;
+    font-size: 10px;
+}
+
+.admin-form-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.admin-form-grid.three {
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+}
+
+.admin-form-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.admin-form-field.full {
+    grid-column: 1 / -1;
+}
+
+.admin-form-field > label {
+    color: #475569;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-form-field input,
+.admin-form-field select,
+.admin-form-field textarea {
+    width: 100%;
+    border: 1px solid #dbe2ea;
+    border-radius: 9px;
+    outline: 0;
+    background: #ffffff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 11px;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.admin-form-field input,
+.admin-form-field select {
+    height: 43px;
+    padding: 0 12px;
+}
+
+.admin-form-field textarea {
+    min-height: 90px;
+    padding: 11px 12px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.admin-form-field input:focus,
+.admin-form-field select:focus,
+.admin-form-field textarea:focus {
+    border-color: #14b8a6;
+    box-shadow:
+        0 0 0 3px
+        rgba(20, 184, 166, 0.1);
+}
+
+.admin-form-field input::placeholder,
+.admin-form-field textarea::placeholder {
+    color: #94a3b8;
+}
+
+.admin-form-field small {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+.admin-field-error {
+    color: #dc2626;
+    font-size: 10px;
+}
+
+.admin-checkbox {
+    display: flex;
+    min-height: 43px;
+    align-items: center;
+    gap: 9px;
+    padding: 0 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 9px;
+    background: #f8fafc;
+    cursor: pointer;
+}
+
+.admin-checkbox input {
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    accent-color: #0f766e;
+}
+
+.admin-checkbox span {
+    color: #475569;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.admin-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 22px 0 5px;
+}
+
+.admin-form-cancel,
+.admin-form-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 43px;
+    padding: 0 18px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-form-cancel {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-form-submit {
+    border: 0;
+    background: #0f766e;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-form-submit:hover {
+    background: #115e59;
+}
+
+@media (max-width: 800px) {
+    .admin-form-grid,
+    .admin-form-grid.three {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-form-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    .admin-form-section {
+        padding: 21px 18px;
+    }
+
+    .admin-form-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .admin-form-cancel,
+    .admin-form-submit {
+        width: 100%;
+    }
+}

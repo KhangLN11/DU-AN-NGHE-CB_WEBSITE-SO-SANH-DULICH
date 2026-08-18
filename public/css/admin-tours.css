@@ -1,0 +1,460 @@
+.admin-tour-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.admin-primary-button {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 17px;
+    border-radius: 9px;
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.admin-primary-button:hover {
+    background: #115e59;
+}
+
+.admin-tour-filter-card {
+    margin-bottom: 20px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.admin-tour-filter {
+    display: grid;
+    grid-template-columns:
+        minmax(220px, 1.5fr)
+        minmax(130px, 0.6fr)
+        minmax(160px, 0.8fr)
+        minmax(180px, 0.9fr)
+        auto
+        auto;
+    align-items: end;
+    gap: 12px;
+}
+
+.admin-filter-search,
+.admin-filter-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-filter-search label,
+.admin-filter-field label {
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-filter-search input,
+.admin-filter-field select {
+    width: 100%;
+    height: 40px;
+    padding: 0 11px;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    outline: 0;
+    background: #ffffff;
+    color: #334155;
+    font-size: 11px;
+}
+
+.admin-filter-search input:focus,
+.admin-filter-field select:focus {
+    border-color: #14b8a6;
+    box-shadow:
+        0 0 0 3px
+        rgba(20, 184, 166, 0.1);
+}
+
+.admin-filter-button,
+.admin-filter-reset {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 8px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-filter-button {
+    border: 0;
+    background: #0f766e;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-filter-reset {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-tour-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 14px;
+}
+
+.admin-tour-summary > div {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.admin-tour-summary strong {
+    color: #111827;
+    font-size: 19px;
+}
+
+.admin-tour-summary span {
+    color: #64748b;
+    font-size: 10px;
+}
+
+.admin-filter-active {
+    display: inline-flex;
+    align-items: center;
+    min-height: 27px;
+    padding: 0 9px;
+    border-radius: 999px;
+    background: #ccfbf1;
+    color: #0f766e !important;
+    font-size: 9px !important;
+    font-weight: 800;
+}
+
+.admin-tour-table-card {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 15px;
+    background: #ffffff;
+}
+
+.admin-tour-table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-tour-table {
+    width: 100%;
+    min-width: 1250px;
+    border-collapse: collapse;
+}
+
+.admin-tour-table th,
+.admin-tour-table td {
+    padding: 14px;
+    border-bottom: 1px solid #f1f5f9;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.admin-tour-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.admin-tour-table th {
+    background: #fafafa;
+    color: #94a3b8;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-tour-table td {
+    color: #475569;
+    font-size: 10px;
+}
+
+.admin-tour-info {
+    display: grid;
+    min-width: 230px;
+    grid-template-columns: 56px minmax(0, 1fr);
+    align-items: center;
+    gap: 11px;
+}
+
+.admin-tour-thumbnail {
+    position: relative;
+    overflow: hidden;
+    width: 56px;
+    height: 50px;
+    border-radius: 8px;
+    background: #ccfbf1;
+}
+
+.admin-tour-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f766e;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.admin-tour-thumbnail img {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-tour-name {
+    display: block;
+    overflow: hidden;
+    max-width: 210px;
+    color: #334155;
+    font-size: 10px;
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-tour-name:hover {
+    color: #0f766e;
+}
+
+.admin-tour-info > div:last-child > span {
+    display: block;
+    margin-top: 3px;
+    color: #94a3b8;
+    font-size: 8px;
+}
+
+.admin-tour-duration {
+    white-space: nowrap;
+}
+
+.admin-tour-price {
+    color: #ea580c;
+    white-space: nowrap;
+}
+
+.admin-tour-destinations {
+    overflow: hidden;
+    max-width: 170px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-featured,
+.admin-tour-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-featured.yes {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.admin-featured.no {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.admin-tour-status.active {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.admin-tour-status.inactive {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.admin-tour-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.admin-action-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 31px;
+    padding: 0 9px;
+    border-radius: 7px;
+    font-size: 8px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.admin-action-button.view {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.admin-action-button.edit {
+    background: #f0fdfa;
+    color: #0f766e;
+}
+
+.admin-action-button.delete {
+    background: #fff1f2;
+    color: #e11d48;
+}
+
+.admin-action-button.disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.admin-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.admin-pagination a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 36px;
+    padding: 0 9px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-pagination a:hover {
+    border-color: #99f6e4;
+    color: #0f766e;
+}
+
+.admin-pagination a.active {
+    border-color: #0f766e;
+    background: #0f766e;
+    color: #ffffff;
+}
+
+.admin-tour-empty {
+    padding: 70px 25px;
+    text-align: center;
+}
+
+.admin-tour-empty > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 15px;
+    border-radius: 14px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.admin-tour-empty h2 {
+    margin-bottom: 5px;
+    color: #111827;
+    font-size: 18px;
+}
+
+.admin-tour-empty p {
+    margin-bottom: 15px;
+    color: #64748b;
+    font-size: 11px;
+}
+
+.admin-tour-empty a {
+    color: #0f766e;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+@media (max-width: 1150px) {
+    .admin-tour-filter {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .admin-tour-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-tour-filter {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-primary-button {
+        width: 100%;
+    }
+}
+
+.admin-tour-alert {
+    margin-bottom: 20px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.admin-tour-alert.success {
+    border: 1px solid #a7f3d0;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.admin-tour-alert.error {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.admin-delete-form {
+    margin: 0;
+}
+
+.admin-action-button.delete {
+    border: 0;
+    cursor: pointer;
+}
+
+.admin-action-button.delete:hover {
+    background: #ffe4e6;
+}

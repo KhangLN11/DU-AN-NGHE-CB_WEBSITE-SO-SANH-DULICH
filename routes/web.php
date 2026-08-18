@@ -99,3 +99,33 @@ $router->get(
     '/admin',
     ['AdminController', 'dashboard']
 );
+
+$router->get(
+    '/admin/tours',
+    ['AdminTourController', 'index']
+);
+
+$router->get(
+    '/admin/tours/create',
+    ['AdminTourController', 'create']
+);
+
+$router->post(
+    '/admin/tours/create',
+    ['AdminTourController', 'store']
+);
+
+$router->get(
+    '/admin/tours/{id}/edit',
+    ['AdminTourController', 'edit']
+);
+
+$router->post(
+    '/admin/tours/{id}/edit',
+    ['AdminTourController', 'update']
+);
+
+$router->post(
+    '/admin/tours/{id}/delete',
+    ['AdminTourController', 'delete']
+);
