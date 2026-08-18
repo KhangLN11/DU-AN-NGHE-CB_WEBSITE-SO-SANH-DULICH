@@ -139,3 +139,23 @@ $router->post(
     '/admin/tours/{id}/locations',
     ['AdminTourController', 'updateLocations']
 );
+
+$router->get(
+    '/admin/tours/{id}/images',
+    ['AdminTourController', 'images']
+);
+
+$router->post(
+    '/admin/tours/{id}/images/upload',
+    ['AdminTourController', 'uploadImages']
+);
+
+$router->post(
+    '/admin/tours/{id}/images/update',
+    ['AdminTourController', 'updateImages']
+);
+
+$router->post(
+    '/admin/tours/{id}/images/{imageId}/delete',
+    ['AdminTourController', 'deleteImage']
+);

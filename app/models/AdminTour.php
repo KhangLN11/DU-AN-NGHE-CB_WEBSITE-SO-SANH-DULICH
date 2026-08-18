@@ -1016,4 +1016,420 @@ public function createTour(array $data): int
         throw $error;
     }
     }
+
+    public function getTourImagesAdmin(
+    int $tourId
+): array {
+    $sql = "
+        SELECT
+            image_id,
+            tour_id,
+            image_url,
+            alt_text,
+            is_thumbnail,
+            sort_order
+        FROM tour_images
+        WHERE tour_id = :tour_id
+        ORDER BY
+            is_thumbnail DESC,
+            sort_order ASC,
+            image_id ASC
+    ";
+
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->bindValue(
+        ':tour_id',
+        $tourId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+    }
+
+    public function findTourImage(
+    int $tourId,
+    int $imageId
+): ?array {
+    $sql = "
+        SELECT
+            image_id,
+            tour_id,
+            image_url,
+            alt_text,
+            is_thumbnail,
+            sort_order
+        FROM tour_images
+        WHERE image_id = :image_id
+          AND tour_id = :tour_id
+        LIMIT 1
+    ";
+
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->bindValue(
+        ':image_id',
+        $imageId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->bindValue(
+        ':tour_id',
+        $tourId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->execute();
+
+    $image = $stmt->fetch();
+
+    return $image ?: null;
+    }
+
+    public function hasTourThumbnail(
+    int $tourId
+): bool {
+    $sql = "
+        SELECT 1
+        FROM tour_images
+        WHERE tour_id = :tour_id
+          AND is_thumbnail = 1
+        LIMIT 1
+    ";
+
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->bindValue(
+        ':tour_id',
+        $tourId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->execute();
+
+    return $stmt->fetchColumn() !== false;
+    }
+
+    public function getNextImageSortOrder(
+    int $tourId
+): int {
+    $sql = "
+        SELECT
+            COALESCE(MAX(sort_order), 0)
+        FROM tour_images
+        WHERE tour_id = :tour_id
+    ";
+
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->bindValue(
+        ':tour_id',
+        $tourId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->execute();
+
+    return (int) $stmt->fetchColumn() + 1;
+    }
+
+    public function addTourImages(
+    int $tourId,
+    array $images
+): bool {
+    if (empty($images)) {
+        return true;
+    }
+
+    try {
+        $this->db->beginTransaction();
+
+        $sql = "
+            INSERT INTO tour_images (
+                tour_id,
+                image_url,
+                alt_text,
+                is_thumbnail,
+                sort_order
+            )
+            VALUES (
+                :tour_id,
+                :image_url,
+                :alt_text,
+                :is_thumbnail,
+                :sort_order
+            )
+        ";
+
+        $stmt = $this->db->prepare($sql);
+
+        foreach ($images as $image) {
+            $stmt->bindValue(
+                ':tour_id',
+                $tourId,
+                PDO::PARAM_INT
+            );
+
+            $stmt->bindValue(
+                ':image_url',
+                $image['image_url'],
+                PDO::PARAM_STR
+            );
+
+            if ($image['alt_text'] === null) {
+                $stmt->bindValue(
+                    ':alt_text',
+                    null,
+                    PDO::PARAM_NULL
+                );
+            } else {
+                $stmt->bindValue(
+                    ':alt_text',
+                    $image['alt_text'],
+                    PDO::PARAM_STR
+                );
+            }
+
+            $stmt->bindValue(
+                ':is_thumbnail',
+                $image['is_thumbnail'],
+                PDO::PARAM_INT
+            );
+
+            $stmt->bindValue(
+                ':sort_order',
+                $image['sort_order'],
+                PDO::PARAM_INT
+            );
+
+            $stmt->execute();
+        }
+
+        $this->db->commit();
+
+        return true;
+    } catch (Throwable $error) {
+        if ($this->db->inTransaction()) {
+            $this->db->rollBack();
+        }
+
+        throw $error;
+    }
+    }
+
+    public function updateTourImages(
+    int $tourId,
+    array $images,
+    ?int $thumbnailId
+): bool {
+    try {
+        $this->db->beginTransaction();
+
+        $resetThumbnail = $this->db->prepare("
+            UPDATE tour_images
+            SET is_thumbnail = 0
+            WHERE tour_id = :tour_id
+        ");
+
+        $resetThumbnail->bindValue(
+            ':tour_id',
+            $tourId,
+            PDO::PARAM_INT
+        );
+
+        $resetThumbnail->execute();
+
+        $updateStmt = $this->db->prepare("
+            UPDATE tour_images
+            SET
+                alt_text = :alt_text,
+                sort_order = :sort_order
+            WHERE image_id = :image_id
+              AND tour_id = :tour_id
+        ");
+
+        foreach ($images as $image) {
+            if ($image['alt_text'] === null) {
+                $updateStmt->bindValue(
+                    ':alt_text',
+                    null,
+                    PDO::PARAM_NULL
+                );
+            } else {
+                $updateStmt->bindValue(
+                    ':alt_text',
+                    $image['alt_text'],
+                    PDO::PARAM_STR
+                );
+            }
+
+            $updateStmt->bindValue(
+                ':sort_order',
+                $image['sort_order'],
+                PDO::PARAM_INT
+            );
+
+            $updateStmt->bindValue(
+                ':image_id',
+                $image['image_id'],
+                PDO::PARAM_INT
+            );
+
+            $updateStmt->bindValue(
+                ':tour_id',
+                $tourId,
+                PDO::PARAM_INT
+            );
+
+            $updateStmt->execute();
+        }
+
+        if ($thumbnailId !== null) {
+            $thumbnailStmt = $this->db->prepare("
+                UPDATE tour_images
+                SET is_thumbnail = 1
+                WHERE image_id = :image_id
+                  AND tour_id = :tour_id
+            ");
+
+            $thumbnailStmt->bindValue(
+                ':image_id',
+                $thumbnailId,
+                PDO::PARAM_INT
+            );
+
+            $thumbnailStmt->bindValue(
+                ':tour_id',
+                $tourId,
+                PDO::PARAM_INT
+            );
+
+            $thumbnailStmt->execute();
+
+            if ($thumbnailStmt->rowCount() !== 1) {
+                throw new RuntimeException(
+                    'Ảnh đại diện không hợp lệ.'
+                );
+            }
+        }
+
+        $this->db->commit();
+
+        return true;
+    } catch (Throwable $error) {
+        if ($this->db->inTransaction()) {
+            $this->db->rollBack();
+        }
+
+        throw $error;
+    }
+    }
+
+    public function deleteTourImage(
+    int $tourId,
+    int $imageId
+): bool {
+    try {
+        $this->db->beginTransaction();
+
+        $image = $this->findTourImage(
+            $tourId,
+            $imageId
+        );
+
+        if ($image === null) {
+            throw new RuntimeException(
+                'Không tìm thấy ảnh.'
+            );
+        }
+
+        $wasThumbnail =
+            (int) $image['is_thumbnail'] === 1;
+
+        $stmt = $this->db->prepare("
+            DELETE FROM tour_images
+            WHERE image_id = :image_id
+              AND tour_id = :tour_id
+        ");
+
+        $stmt->bindValue(
+            ':image_id',
+            $imageId,
+            PDO::PARAM_INT
+        );
+
+        $stmt->bindValue(
+            ':tour_id',
+            $tourId,
+            PDO::PARAM_INT
+        );
+
+        $stmt->execute();
+
+        if ($stmt->rowCount() !== 1) {
+            throw new RuntimeException(
+                'Không thể xóa ảnh.'
+            );
+        }
+
+        if ($wasThumbnail) {
+            $nextStmt = $this->db->prepare("
+                SELECT image_id
+                FROM tour_images
+                WHERE tour_id = :tour_id
+                ORDER BY
+                    sort_order ASC,
+                    image_id ASC
+                LIMIT 1
+            ");
+
+            $nextStmt->bindValue(
+                ':tour_id',
+                $tourId,
+                PDO::PARAM_INT
+            );
+
+            $nextStmt->execute();
+
+            $nextImageId =
+                $nextStmt->fetchColumn();
+
+            if ($nextImageId !== false) {
+                $thumbnailStmt =
+                    $this->db->prepare("
+                        UPDATE tour_images
+                        SET is_thumbnail = 1
+                        WHERE image_id = :image_id
+                          AND tour_id = :tour_id
+                    ");
+
+                $thumbnailStmt->bindValue(
+                    ':image_id',
+                    (int) $nextImageId,
+                    PDO::PARAM_INT
+                );
+
+                $thumbnailStmt->bindValue(
+                    ':tour_id',
+                    $tourId,
+                    PDO::PARAM_INT
+                );
+
+                $thumbnailStmt->execute();
+            }
+        }
+
+        $this->db->commit();
+
+        return true;
+    } catch (Throwable $error) {
+        if ($this->db->inTransaction()) {
+            $this->db->rollBack();
+        }
+
+        throw $error;
+    }
+    }
 }

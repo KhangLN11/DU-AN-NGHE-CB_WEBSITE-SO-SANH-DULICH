@@ -984,18 +984,32 @@ class AdminTourController extends AdminBaseController
     }
 
     try {
-        $tourModel->deleteTour(
+    $tourImagePaths =
+        $tourModel->getTourImagePaths(
             $tourId
         );
 
-        $_SESSION['admin_tour_success'] =
-            'Đã xóa Tour #'
-            . $tourId
-            . ' thành công.';
-    } catch (Throwable $error) {
-        $_SESSION['admin_tour_error'] =
-            'Không thể xóa Tour. Vui lòng thử lại.';
+    $tourModel->deleteTour(
+        $tourId
+    );
+
+    foreach (
+        $tourImagePaths
+        as $imagePath
+    ) {
+        $this->deleteUploadedTourImageFile(
+            $imagePath
+        );
     }
+
+    $_SESSION['admin_tour_success'] =
+        'Đã xóa Tour #'
+        . $tourId
+        . ' thành công.';
+} catch (Throwable $error) {
+    $_SESSION['admin_tour_error'] =
+        'Không thể xóa Tour. Vui lòng thử lại.';
+}
 
     $this->redirect(
         'admin/tours'
@@ -1294,5 +1308,629 @@ class AdminTourController extends AdminBaseController
         . $tourId
         . '/locations'
     );
+    }
+
+    public function images(string $id): void
+{
+    $this->requireAdmin();
+
+    $tourId = $this->positiveInt($id);
+
+    if ($tourId === 0) {
+        $this->notFound();
+    }
+
+    $tourModel = new AdminTour();
+
+    $tour = $tourModel->findById(
+        $tourId
+    );
+
+    if ($tour === null) {
+        $this->notFound();
+    }
+
+    $images =
+        $tourModel->getTourImagesAdmin(
+            $tourId
+        );
+
+    $successMessage =
+        $_SESSION['admin_tour_image_success']
+        ?? null;
+
+    $errorMessage =
+        $_SESSION['admin_tour_image_error']
+        ?? null;
+
+    unset(
+        $_SESSION['admin_tour_image_success'],
+        $_SESSION['admin_tour_image_error']
+    );
+
+    $this->view(
+        'admin/tours/images',
+        [
+            'title' =>
+                'Ảnh Tour - TourCompare Admin',
+
+            'styles' => [
+                'css/admin.css',
+                'css/admin-tour-images.css'
+            ],
+
+            'scripts' => [
+                'js/admin-tour-images.js'
+            ],
+
+            'tourId' => $tourId,
+
+            'tour' => $tour,
+
+            'images' => $images,
+
+            'successMessage' =>
+                $successMessage,
+
+            'errorMessage' =>
+                $errorMessage
+        ],
+        'admin'
+    );
+    }
+
+    public function uploadImages(
+    string $id
+): void {
+    $this->requireAdmin();
+
+    $tourId = $this->positiveInt($id);
+
+    if ($tourId === 0) {
+        $this->notFound();
+    }
+
+    $tourModel = new AdminTour();
+
+    $tour = $tourModel->findById(
+        $tourId
+    );
+
+    if ($tour === null) {
+        $this->notFound();
+    }
+
+    if (
+        !isset($_FILES['images'])
+        || !is_array(
+            $_FILES['images']['name']
+            ?? null
+        )
+    ) {
+        $_SESSION['admin_tour_image_error'] =
+            'Vui lòng chọn ít nhất một ảnh.';
+
+        $this->redirect(
+            'admin/tours/'
+            . $tourId
+            . '/images'
+        );
+    }
+
+    $files = $this->normalizeUploadedFiles(
+        $_FILES['images']
+    );
+
+    if (empty($files)) {
+        $_SESSION['admin_tour_image_error'] =
+            'Vui lòng chọn ít nhất một ảnh.';
+
+        $this->redirect(
+            'admin/tours/'
+            . $tourId
+            . '/images'
+        );
+    }
+
+    if (count($files) > 10) {
+        $_SESSION['admin_tour_image_error'] =
+            'Mỗi lần chỉ được tải tối đa 10 ảnh.';
+
+        $this->redirect(
+            'admin/tours/'
+            . $tourId
+            . '/images'
+        );
+    }
+
+    $uploadDirectory =
+        __DIR__
+        . '/../../public/uploads/tours';
+
+    if (!is_dir($uploadDirectory)) {
+        mkdir(
+            $uploadDirectory,
+            0755,
+            true
+        );
+    }
+
+    $allowedTypes = [
+        IMAGETYPE_JPEG => 'jpg',
+        IMAGETYPE_PNG => 'png',
+        IMAGETYPE_WEBP => 'webp'
+    ];
+
+    $preparedImages = [];
+    $movedFiles = [];
+
+    $nextSortOrder =
+        $tourModel->getNextImageSortOrder(
+            $tourId
+        );
+
+    $hasThumbnail =
+        $tourModel->hasTourThumbnail(
+            $tourId
+        );
+
+    try {
+        foreach ($files as $index => $file) {
+            if (
+                $file['error']
+                !== UPLOAD_ERR_OK
+            ) {
+                throw new RuntimeException(
+                    'Có ảnh tải lên không thành công.'
+                );
+            }
+
+            if (
+                $file['size']
+                > 5 * 1024 * 1024
+            ) {
+                throw new RuntimeException(
+                    'Mỗi ảnh không được vượt quá 5MB.'
+                );
+            }
+
+            $imageInfo = getimagesize(
+                $file['tmp_name']
+            );
+
+            if ($imageInfo === false) {
+                throw new RuntimeException(
+                    'Có file không phải hình ảnh hợp lệ.'
+                );
+            }
+
+            $imageType = $imageInfo[2];
+
+            if (
+                !isset(
+                    $allowedTypes[
+                        $imageType
+                    ]
+                )
+            ) {
+                throw new RuntimeException(
+                    'Chỉ chấp nhận ảnh JPG, PNG hoặc WEBP.'
+                );
+            }
+
+            $extension =
+                $allowedTypes[
+                    $imageType
+                ];
+
+            $fileName =
+                'tour_'
+                . $tourId
+                . '_'
+                . bin2hex(
+                    random_bytes(10)
+                )
+                . '.'
+                . $extension;
+
+            $destination =
+                $uploadDirectory
+                . '/'
+                . $fileName;
+
+            if (
+                !move_uploaded_file(
+                    $file['tmp_name'],
+                    $destination
+                )
+            ) {
+                throw new RuntimeException(
+                    'Không thể lưu ảnh lên máy chủ.'
+                );
+            }
+
+            $movedFiles[] =
+                $destination;
+
+            $preparedImages[] = [
+                'image_url' =>
+                    '/uploads/tours/'
+                    . $fileName,
+
+                'alt_text' =>
+                    $tour['tour_name'],
+
+                'is_thumbnail' =>
+                    !$hasThumbnail
+                    && $index === 0
+                        ? 1
+                        : 0,
+
+                'sort_order' =>
+                    $nextSortOrder
+                    + $index
+            ];
+        }
+
+        $tourModel->addTourImages(
+            $tourId,
+            $preparedImages
+        );
+
+        $_SESSION[
+            'admin_tour_image_success'
+        ] =
+            'Đã tải lên '
+            . count($preparedImages)
+            . ' ảnh thành công.';
+    } catch (Throwable $error) {
+        foreach ($movedFiles as $filePath) {
+            if (is_file($filePath)) {
+                unlink($filePath);
+            }
+        }
+
+        $_SESSION[
+            'admin_tour_image_error'
+        ] = $error->getMessage();
+    }
+
+    $this->redirect(
+        'admin/tours/'
+        . $tourId
+        . '/images'
+    );
+    }
+
+    public function updateImages(
+    string $id
+): void {
+    $this->requireAdmin();
+
+    $tourId = $this->positiveInt($id);
+
+    if ($tourId === 0) {
+        $this->notFound();
+    }
+
+    $tourModel = new AdminTour();
+
+    $tour = $tourModel->findById(
+        $tourId
+    );
+
+    if ($tour === null) {
+        $this->notFound();
+    }
+
+    $existingImages =
+        $tourModel->getTourImagesAdmin(
+            $tourId
+        );
+
+    if (empty($existingImages)) {
+        $this->redirect(
+            'admin/tours/'
+            . $tourId
+            . '/images'
+        );
+    }
+
+    $altTexts =
+        $_POST['alt_text']
+        ?? [];
+
+    $sortOrders =
+        $_POST['sort_order']
+        ?? [];
+
+    $thumbnailId =
+        $this->positiveInt(
+            $_POST['thumbnail_id']
+            ?? null
+        );
+
+    if (!is_array($altTexts)) {
+        $altTexts = [];
+    }
+
+    if (!is_array($sortOrders)) {
+        $sortOrders = [];
+    }
+
+    $images = [];
+    $errors = [];
+
+    $validImageIds = [];
+
+    foreach ($existingImages as $image) {
+        $imageId =
+            (int) $image['image_id'];
+
+        $validImageIds[] =
+            $imageId;
+
+        $altText = trim(
+            $altTexts[$imageId]
+            ?? ''
+        );
+
+        $sortOrder =
+            $this->positiveInt(
+                $sortOrders[$imageId]
+                ?? null
+            );
+
+        if (
+            mb_strlen($altText)
+            > 255
+        ) {
+            $errors[] =
+                'Alt text không được vượt quá 255 ký tự.';
+        }
+
+        if ($sortOrder === 0) {
+            $sortOrder = 1;
+        }
+
+        $images[] = [
+            'image_id' =>
+                $imageId,
+
+            'alt_text' =>
+                $altText !== ''
+                    ? $altText
+                    : null,
+
+            'sort_order' =>
+                $sortOrder
+        ];
+    }
+
+    if (
+        $thumbnailId === 0
+        || !in_array(
+            $thumbnailId,
+            $validImageIds,
+            true
+        )
+    ) {
+        $errors[] =
+            'Vui lòng chọn một ảnh đại diện hợp lệ.';
+    }
+
+    if (!empty($errors)) {
+        $_SESSION[
+            'admin_tour_image_error'
+        ] =
+            implode(
+                ' ',
+                array_unique($errors)
+            );
+
+        $this->redirect(
+            'admin/tours/'
+            . $tourId
+            . '/images'
+        );
+    }
+
+    usort(
+        $images,
+        function (
+            array $a,
+            array $b
+        ) {
+            return
+                $a['sort_order']
+                <=>
+                $b['sort_order'];
+        }
+    );
+
+    foreach (
+        $images
+        as $index => &$image
+    ) {
+        $image['sort_order'] =
+            $index + 1;
+    }
+
+    unset($image);
+
+    try {
+        $tourModel->updateTourImages(
+            $tourId,
+            $images,
+            $thumbnailId
+        );
+
+        $_SESSION[
+            'admin_tour_image_success'
+        ] =
+            'Thông tin ảnh đã được cập nhật.';
+    } catch (Throwable $error) {
+        $_SESSION[
+            'admin_tour_image_error'
+        ] =
+            'Không thể cập nhật thông tin ảnh.';
+    }
+
+    $this->redirect(
+        'admin/tours/'
+        . $tourId
+        . '/images'
+    );
+    }
+
+    public function deleteImage(
+    string $id,
+    string $imageId
+): void {
+    $this->requireAdmin();
+
+    $tourId =
+        $this->positiveInt($id);
+
+    $imageId =
+        $this->positiveInt(
+            $imageId
+        );
+
+    if (
+        $tourId === 0
+        || $imageId === 0
+    ) {
+        $this->notFound();
+    }
+
+    $tourModel =
+        new AdminTour();
+
+    $tour =
+        $tourModel->findById(
+            $tourId
+        );
+
+    if ($tour === null) {
+        $this->notFound();
+    }
+
+    $image =
+        $tourModel->findTourImage(
+            $tourId,
+            $imageId
+        );
+
+    if ($image === null) {
+        $this->notFound();
+    }
+
+    try {
+        $tourModel->deleteTourImage(
+            $tourId,
+            $imageId
+        );
+
+        $this->deleteUploadedTourImageFile(
+            $image['image_url']
+        );
+
+        $_SESSION[
+            'admin_tour_image_success'
+        ] =
+            'Đã xóa ảnh thành công.';
+    } catch (Throwable $error) {
+        $_SESSION[
+            'admin_tour_image_error'
+        ] =
+            'Không thể xóa ảnh.';
+    }
+
+    $this->redirect(
+        'admin/tours/'
+        . $tourId
+        . '/images'
+    );
+    }
+
+    private function normalizeUploadedFiles(
+    array $files
+): array {
+    $normalized = [];
+
+    $count = count(
+        $files['name'] ?? []
+    );
+
+    for ($index = 0; $index < $count; $index++) {
+        $error =
+            $files['error'][$index]
+            ?? UPLOAD_ERR_NO_FILE;
+
+        if ($error === UPLOAD_ERR_NO_FILE) {
+            continue;
+        }
+
+        $normalized[] = [
+            'name' =>
+                $files['name'][$index]
+                ?? '',
+
+            'type' =>
+                $files['type'][$index]
+                ?? '',
+
+            'tmp_name' =>
+                $files['tmp_name'][$index]
+                ?? '',
+
+            'error' =>
+                $error,
+
+            'size' =>
+                (int) (
+                    $files['size'][$index]
+                    ?? 0
+                )
+        ];
+    }
+
+    return $normalized;
+}
+
+private function deleteUploadedTourImageFile(
+    string $imageUrl
+): void {
+    $normalized = str_replace(
+        '\\',
+        '/',
+        $imageUrl
+    );
+
+    $prefix =
+        '/uploads/tours/';
+
+    if (
+        !str_starts_with(
+            $normalized,
+            $prefix
+        )
+    ) {
+        return;
+    }
+
+    $fileName = basename(
+        $normalized
+    );
+
+    $filePath =
+        __DIR__
+        . '/../../public/uploads/tours/'
+        . $fileName;
+
+    if (is_file($filePath)) {
+        unlink($filePath);
+    }
     }
 }

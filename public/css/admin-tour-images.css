@@ -1,0 +1,425 @@
+.admin-image-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.admin-image-heading-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.admin-image-heading-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 39px;
+    padding: 0 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-image-heading-actions a:hover {
+    border-color: #99f6e4;
+    color: #0f766e;
+}
+
+.admin-image-alert {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.admin-image-alert.success {
+    border: 1px solid #a7f3d0;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.admin-image-alert.error {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.admin-image-upload-card,
+.admin-image-list-card {
+    overflow: hidden;
+    margin-bottom: 22px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.admin-image-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 22px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-image-section-heading > div > span {
+    display: block;
+    margin-bottom: 2px;
+    color: #0f766e;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.admin-image-section-heading h2 {
+    color: #111827;
+    font-size: 18px;
+}
+
+.admin-image-section-heading p,
+.admin-image-section-heading > strong {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+.admin-image-upload-card form {
+    padding: 22px;
+}
+
+.admin-image-upload-box {
+    display: flex;
+    min-height: 145px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    border: 2px dashed #cbd5e1;
+    border-radius: 13px;
+    background: #f8fafc;
+    cursor: pointer;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.admin-image-upload-box:hover {
+    border-color: #2dd4bf;
+    background: #f0fdfa;
+}
+
+.admin-image-upload-box strong {
+    color: #334155;
+    font-size: 12px;
+}
+
+.admin-image-upload-box span {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+.admin-image-upload-box input {
+    display: none;
+}
+
+.admin-image-preview-list {
+    display: grid;
+    grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.admin-image-preview-item {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #ffffff;
+}
+
+.admin-image-preview-item img {
+    display: block;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+}
+
+.admin-image-preview-item span {
+    display: block;
+    overflow: hidden;
+    padding: 8px;
+    color: #64748b;
+    font-size: 8px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-image-upload-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 18px;
+}
+
+.admin-image-upload-actions > span {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+.admin-image-upload-actions button,
+.admin-image-save-actions button {
+    min-height: 40px;
+    padding: 0 15px;
+    border: 0;
+    border-radius: 8px;
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-image-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 20px;
+}
+
+.admin-image-card {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 13px;
+    background: #ffffff;
+}
+
+.admin-image-photo {
+    position: relative;
+    height: 190px;
+    background: #f1f5f9;
+}
+
+.admin-image-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-image-thumbnail-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px 8px;
+    border-radius: 999px;
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 7px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-image-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px;
+}
+
+.admin-thumbnail-option {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #0f766e;
+    font-size: 9px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-thumbnail-option input {
+    accent-color: #0f766e;
+}
+
+.admin-image-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-image-field label {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-image-field input {
+    width: 100%;
+    height: 38px;
+    padding: 0 9px;
+    border: 1px solid #dbe2ea;
+    border-radius: 7px;
+    outline: 0;
+    color: #334155;
+    font-size: 9px;
+}
+
+.admin-image-field input:focus {
+    border-color: #14b8a6;
+    box-shadow:
+        0 0 0 3px
+        rgba(20, 184, 166, 0.1);
+}
+
+.admin-image-path {
+    overflow: hidden;
+    color: #94a3b8;
+    font-size: 7px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-image-save-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 18px 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.admin-image-delete-section {
+    padding: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.admin-image-delete-section h3 {
+    margin-bottom: 3px;
+    color: #111827;
+    font-size: 14px;
+}
+
+.admin-image-delete-section > p {
+    margin-bottom: 14px;
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+.admin-image-delete-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.admin-image-delete-list form {
+    display: grid;
+    grid-template-columns:
+        45px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 11px;
+    border: 1px solid #f1f5f9;
+    border-radius: 8px;
+}
+
+.admin-image-delete-list span {
+    color: #94a3b8;
+    font-size: 8px;
+}
+
+.admin-image-delete-list strong {
+    overflow: hidden;
+    color: #475569;
+    font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.admin-image-delete-list button {
+    min-height: 30px;
+    padding: 0 9px;
+    border: 1px solid #fecaca;
+    border-radius: 7px;
+    background: #ffffff;
+    color: #dc2626;
+    font-size: 8px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-image-empty {
+    padding: 60px 25px;
+    text-align: center;
+}
+
+.admin-image-empty > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    margin: 0 auto 14px;
+    border-radius: 14px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-image-empty h3 {
+    margin-bottom: 4px;
+    color: #111827;
+}
+
+.admin-image-empty p {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+@media (max-width: 1050px) {
+    .admin-image-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .admin-image-preview-list {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .admin-image-heading,
+    .admin-image-section-heading,
+    .admin-image-upload-actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-image-heading-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .admin-image-heading-actions a {
+        width: 100%;
+    }
+
+    .admin-image-grid,
+    .admin-image-preview-list {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-image-preview-item img {
+        height: 170px;
+    }
+
+    .admin-image-photo {
+        height: 230px;
+    }
+}
