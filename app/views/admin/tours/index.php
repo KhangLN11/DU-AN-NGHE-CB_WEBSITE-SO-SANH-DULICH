@@ -592,6 +592,17 @@ $hasFilters =
     Ảnh
 </a>
 
+<a
+    class="admin-action-button schedules"
+    href="<?= base_url(
+        'admin/tours/'
+        . $tour['tour_id']
+        . '/schedules'
+    ) ?>"
+>
+    Lịch trình
+</a>
+
                                         <a
                                             class="admin-action-button edit"
                                             href="<?= base_url(

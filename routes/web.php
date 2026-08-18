@@ -159,3 +159,13 @@ $router->post(
     '/admin/tours/{id}/images/{imageId}/delete',
     ['AdminTourController', 'deleteImage']
 );
+
+$router->get(
+    '/admin/tours/{id}/schedules',
+    ['AdminTourController', 'schedules']
+);
+
+$router->post(
+    '/admin/tours/{id}/schedules',
+    ['AdminTourController', 'updateSchedules']
+);

@@ -1432,4 +1432,34 @@ public function createTour(array $data): int
         throw $error;
     }
     }
+
+    public function getTourSchedulesAdmin(
+    int $tourId
+): array {
+    $sql = "
+        SELECT
+            schedule_id,
+            tour_id,
+            day_number,
+            title,
+            description
+        FROM tour_schedules
+        WHERE tour_id = :tour_id
+        ORDER BY
+            day_number ASC,
+            schedule_id ASC
+    ";
+
+    $stmt = $this->db->prepare($sql);
+
+    $stmt->bindValue(
+        ':tour_id',
+        $tourId,
+        PDO::PARAM_INT
+    );
+
+    $stmt->execute();
+
+    return $stmt->fetchAll();
+}
 }

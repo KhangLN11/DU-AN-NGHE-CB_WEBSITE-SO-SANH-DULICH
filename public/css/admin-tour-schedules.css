@@ -1,0 +1,332 @@
+.admin-schedule-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.admin-schedule-heading-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.admin-schedule-heading-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 39px;
+    padding: 0 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-schedule-heading-actions a:hover {
+    border-color: #99f6e4;
+    color: #0f766e;
+}
+
+.admin-schedule-alert {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.admin-schedule-alert.success {
+    border: 1px solid #a7f3d0;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.admin-schedule-alert.error {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.admin-schedule-guide {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 20px;
+    padding: 18px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.admin-schedule-guide > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-schedule-guide span {
+    color: #94a3b8;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+}
+
+.admin-schedule-guide strong {
+    margin-top: 2px;
+    color: #334155;
+    font-size: 12px;
+}
+
+.admin-schedule-duration {
+    align-items: flex-end;
+}
+
+.admin-schedule-form {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.admin-schedule-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-schedule-toolbar > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-schedule-toolbar span {
+    color: #94a3b8;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-schedule-toolbar strong {
+    margin-top: 2px;
+    color: #334155;
+    font-size: 12px;
+}
+
+.admin-add-schedule {
+    min-height: 38px;
+    padding: 0 13px;
+    border: 0;
+    border-radius: 8px;
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-add-schedule:hover {
+    background: #115e59;
+}
+
+.admin-schedule-rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-schedule-row {
+    display: grid;
+    grid-template-columns:
+        65px minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 16px;
+    padding: 20px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-schedule-day {
+    display: flex;
+    min-height: 64px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 12px;
+    background: #ccfbf1;
+}
+
+.admin-schedule-day span {
+    color: #0f766e;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-schedule-day strong {
+    color: #0f766e;
+    font-size: 23px;
+}
+
+.admin-schedule-fields {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.admin-schedule-field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-schedule-field label {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.admin-schedule-field input,
+.admin-schedule-field textarea {
+    width: 100%;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    outline: 0;
+    background: #ffffff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 10px;
+}
+
+.admin-schedule-field input {
+    height: 40px;
+    padding: 0 11px;
+}
+
+.admin-schedule-field textarea {
+    min-height: 105px;
+    padding: 10px 11px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.admin-schedule-field input:focus,
+.admin-schedule-field textarea:focus {
+    border-color: #14b8a6;
+    box-shadow:
+        0 0 0 3px
+        rgba(20, 184, 166, 0.1);
+}
+
+.admin-remove-schedule {
+    min-height: 38px;
+    padding: 0 11px;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #dc2626;
+    font-size: 8px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-remove-schedule:hover {
+    background: #fef2f2;
+}
+
+.admin-schedule-empty {
+    padding: 60px 25px;
+    color: #94a3b8;
+    font-size: 10px;
+    text-align: center;
+}
+
+.admin-schedule-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 9px;
+    padding: 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.admin-schedule-actions a,
+.admin-schedule-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 41px;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-schedule-actions a {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-schedule-actions button {
+    border: 0;
+    background: #0f766e;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-schedule-actions button:hover {
+    background: #115e59;
+}
+
+@media (max-width: 760px) {
+    .admin-schedule-heading,
+    .admin-schedule-guide,
+    .admin-schedule-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-schedule-heading-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .admin-schedule-heading-actions a,
+    .admin-add-schedule {
+        width: 100%;
+    }
+
+    .admin-schedule-duration {
+        align-items: flex-start;
+    }
+
+    .admin-schedule-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-schedule-day {
+        width: 65px;
+    }
+
+    .admin-remove-schedule {
+        width: 100%;
+    }
+
+    .admin-schedule-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .admin-schedule-actions a,
+    .admin-schedule-actions button {
+        width: 100%;
+    }
+}

@@ -468,3 +468,8 @@
     background: #f5f3ff;
     color: #6d28d9;
 }
+
+.admin-action-button.schedules {
+    background: #fff7ed;
+    color: #c2410c;
+}
