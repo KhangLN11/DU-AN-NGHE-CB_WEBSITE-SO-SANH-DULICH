@@ -1,0 +1,458 @@
+.admin-company-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.admin-company-create {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    border-radius: 9px;
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-company-create.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.admin-company-alert {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.admin-company-alert.success {
+    border: 1px solid #a7f3d0;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.admin-company-alert.error {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.admin-company-toolbar {
+    margin-bottom: 18px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.admin-company-toolbar form {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.admin-company-search,
+.admin-company-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-company-search {
+    flex: 1;
+}
+
+.admin-company-filter {
+    width: 180px;
+}
+
+.admin-company-search label,
+.admin-company-filter label {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-company-search input,
+.admin-company-filter select {
+    width: 100%;
+    height: 40px;
+    padding: 0 11px;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    outline: 0;
+    background: #ffffff;
+    color: #334155;
+    font-size: 10px;
+}
+
+.admin-company-search input:focus,
+.admin-company-filter select:focus {
+    border-color: #14b8a6;
+    box-shadow:
+        0 0 0 3px
+        rgba(20, 184, 166, 0.1);
+}
+
+.admin-company-toolbar button,
+.admin-company-reset {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-company-toolbar button {
+    border: 0;
+    background: #0f766e;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-company-reset {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-company-list-card {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.admin-company-list-heading {
+    padding: 18px 20px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-company-list-heading > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-company-list-heading span {
+    color: #94a3b8;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-company-list-heading strong {
+    margin-top: 2px;
+    color: #334155;
+    font-size: 12px;
+}
+
+.admin-company-table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-company-table {
+    width: 100%;
+    min-width: 1100px;
+    border-collapse: collapse;
+}
+
+.admin-company-table th {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 800;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.admin-company-table td {
+    padding: 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #475569;
+    font-size: 10px;
+    vertical-align: middle;
+}
+
+.admin-company-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.admin-company-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.company-id {
+    color: #94a3b8;
+    font-weight: 700;
+}
+
+.company-main {
+    display: flex;
+    min-width: 210px;
+    align-items: center;
+    gap: 11px;
+}
+
+.company-logo {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-weight: 800;
+}
+
+.company-logo img {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.company-main-content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.company-main-content strong {
+    color: #111827;
+    font-size: 11px;
+}
+
+.company-main-content code {
+    color: #94a3b8;
+    font-size: 8px;
+}
+
+.company-contact {
+    display: flex;
+    min-width: 150px;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.company-contact span {
+    color: #475569;
+    font-size: 9px;
+}
+
+.company-contact small {
+    color: #94a3b8;
+    font-size: 8px;
+}
+
+.company-website {
+    color: #0f766e;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.company-website:hover {
+    text-decoration: underline;
+}
+
+.company-muted {
+    color: #cbd5e1;
+}
+
+.company-tour-count {
+    display: inline-flex;
+    min-width: 32px;
+    min-height: 28px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border-radius: 8px;
+    background: #eff6ff;
+    color: #1d4ed8;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.company-status {
+    display: inline-flex;
+    min-height: 28px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 9px;
+    border-radius: 999px;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.company-status.active {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.company-status.inactive {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.company-date {
+    color: #64748b;
+    font-size: 9px;
+}
+
+.admin-company-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.company-action {
+    display: inline-flex;
+    min-height: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 9px;
+    border-radius: 7px;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.company-action.edit {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.company-action.delete {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.company-action.disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.admin-company-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 18px 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.admin-company-pagination a {
+    display: inline-flex;
+    min-width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-company-pagination a.active {
+    border-color: #0f766e;
+    background: #0f766e;
+    color: #ffffff;
+}
+
+.admin-company-empty {
+    padding: 70px 25px;
+    text-align: center;
+}
+
+.admin-company-empty > div {
+    display: flex;
+    width: 56px;
+    height: 56px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    border-radius: 14px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-company-empty h3 {
+    margin-bottom: 4px;
+    color: #111827;
+    font-size: 14px;
+}
+
+.admin-company-empty p {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+@media (max-width: 760px) {
+    .admin-company-heading,
+    .admin-company-toolbar form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-company-create,
+    .admin-company-filter,
+    .admin-company-toolbar button,
+    .admin-company-reset {
+        width: 100%;
+    }
+}
+
+.admin-company-actions form {
+    margin: 0;
+}
+
+.company-action {
+    border: 0;
+    font-family: inherit;
+}
+
+button.company-action {
+    cursor: pointer;
+}
+
+.company-action.disable {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.company-action.disable:hover {
+    background: #ffedd5;
+}
+
+.company-action.delete:hover {
+    background: #fee2e2;
+}
+
+.company-action.locked {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.company-action.locked:hover {
+    background: #fef2f2;
+}

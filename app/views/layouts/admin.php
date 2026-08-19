@@ -112,9 +112,9 @@ $currentPath = parse_url(
                     Danh mục
                 </a>
 
-                <span>
+                <a href="<?= base_url('admin/companies') ?>">
                     Công ty
-                </span>
+                </a>
 
                 <span>
                     Địa điểm

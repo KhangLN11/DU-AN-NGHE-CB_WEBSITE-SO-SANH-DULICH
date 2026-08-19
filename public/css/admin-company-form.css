@@ -1,0 +1,354 @@
+.admin-company-form-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.admin-company-form-back {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 13px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-company-form-back:hover {
+    border-color: #99f6e4;
+    color: #0f766e;
+}
+
+.admin-company-form-alert {
+    margin-bottom: 18px;
+    padding: 14px 16px;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    background: #fef2f2;
+    color: #dc2626;
+    font-size: 9px;
+    line-height: 1.7;
+}
+
+.admin-company-form-alert strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 10px;
+}
+
+.admin-company-form-card {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.admin-company-form-card-heading {
+    padding: 20px 22px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-company-form-card-heading span {
+    display: block;
+    margin-bottom: 2px;
+    color: #0f766e;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+.admin-company-form-card-heading h2 {
+    color: #111827;
+    font-size: 18px;
+}
+
+.admin-company-form-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    padding: 22px;
+}
+
+.admin-company-form-field {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-company-form-field.full {
+    grid-column: 1 / -1;
+}
+
+.admin-company-form-field label {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.admin-company-form-field input,
+.admin-company-form-field select,
+.admin-company-form-field textarea {
+    width: 100%;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    outline: 0;
+    background: #ffffff;
+    color: #334155;
+    font-family: inherit;
+    font-size: 10px;
+}
+
+.admin-company-form-field input,
+.admin-company-form-field select {
+    height: 42px;
+    padding: 0 11px;
+}
+
+.admin-company-form-field textarea {
+    min-height: 150px;
+    padding: 11px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.admin-company-form-field input:focus,
+.admin-company-form-field select:focus,
+.admin-company-form-field textarea:focus {
+    border-color: #14b8a6;
+    box-shadow:
+        0 0 0 3px
+        rgba(20, 184, 166, 0.1);
+}
+
+.field-error {
+    color: #dc2626;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.company-logo-upload {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.company-logo-preview {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    width: 90px;
+    height: 90px;
+    flex: 0 0 90px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.company-logo-preview img {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.company-logo-preview img.visible {
+    display: block;
+}
+
+.company-logo-upload-content {
+    display: flex;
+    min-width: 0;
+    flex: 1;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.company-logo-upload-content input[type="file"] {
+    height: auto;
+    min-height: 40px;
+    padding: 8px 10px;
+    background: #ffffff;
+}
+
+.company-logo-upload-content p {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 8px;
+    line-height: 1.6;
+}
+
+.company-current-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    background: #f8fafc;
+}
+
+.company-current-logo-image {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    width: 72px;
+    height: 72px;
+    flex: 0 0 72px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.company-current-logo-image img {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.company-current-logo-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.company-current-logo-content strong {
+    color: #334155;
+    font-size: 10px;
+}
+
+.company-current-logo-remove {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #dc2626;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.company-current-logo-remove input {
+    width: auto;
+    height: auto;
+    box-shadow: none;
+}
+
+.company-system-info {
+    display: flex;
+    min-height: 42px;
+    justify-content: center;
+    flex-direction: column;
+    gap: 3px;
+    padding: 8px 11px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.company-system-info span {
+    color: #64748b;
+    font-size: 9px;
+}
+
+.admin-company-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+    margin-top: 18px;
+}
+
+.admin-company-form-actions a,
+.admin-company-form-actions button {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-company-form-actions a {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-company-form-actions button {
+    border: 0;
+    background: #0f766e;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-company-form-actions button:hover {
+    background: #115e59;
+}
+
+@media (max-width: 720px) {
+    .admin-company-form-heading {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-company-form-back {
+        width: 100%;
+    }
+
+    .admin-company-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-company-form-field.full {
+        grid-column: auto;
+    }
+
+    .company-logo-upload {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .company-logo-preview {
+        width: 100%;
+        height: 160px;
+        flex-basis: auto;
+    }
+
+    .admin-company-form-actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .admin-company-form-actions a,
+    .admin-company-form-actions button {
+        width: 100%;
+    }
+}

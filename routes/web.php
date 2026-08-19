@@ -204,3 +204,38 @@ $router->post(
     '/admin/categories/{id}/disable',
     ['AdminCategoryController', 'disable']
 );
+
+$router->get(
+    '/admin/companies',
+    ['AdminCompanyController', 'index']
+);
+
+$router->get(
+    '/admin/companies/create',
+    ['AdminCompanyController', 'create']
+);
+
+$router->post(
+    '/admin/companies/create',
+    ['AdminCompanyController', 'store']
+);
+
+$router->get(
+    '/admin/companies/{id}/edit',
+    ['AdminCompanyController', 'edit']
+);
+
+$router->post(
+    '/admin/companies/{id}/edit',
+    ['AdminCompanyController', 'update']
+);
+
+$router->post(
+    '/admin/companies/{id}/disable',
+    ['AdminCompanyController', 'disable']
+);
+
+$router->post(
+    '/admin/companies/{id}/delete',
+    ['AdminCompanyController', 'delete']
+);
