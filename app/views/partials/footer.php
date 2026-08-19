@@ -8,7 +8,7 @@
                 <span class="logo-icon">T</span>
 
                 <span class="logo-text">
-                    TourCompare
+                    VivuTourViet
                 </span>
             </a>
 
@@ -74,7 +74,7 @@
     <div class="footer-bottom">
 
         <p>
-            © <?= date('Y') ?> TourCompare. All rights reserved.
+            © <?= date('Y') ?> VivuTourViet. All rights reserved.
         </p>
 
     </div>

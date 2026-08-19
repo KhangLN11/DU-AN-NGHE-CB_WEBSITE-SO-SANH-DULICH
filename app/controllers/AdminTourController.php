@@ -919,13 +919,35 @@ class AdminTourController extends AdminBaseController
             __DIR__
             . '/../../public/uploads/tours';
 
-        if (!is_dir($uploadDirectory)) {
-            mkdir(
-                $uploadDirectory,
-                0755,
-                true
-            );
-        }
+        if (
+    !is_dir($uploadDirectory)
+    && !mkdir(
+        $uploadDirectory,
+        0755,
+        true
+    )
+    && !is_dir($uploadDirectory)
+) {
+    $_SESSION['admin_tour_image_error'] =
+        'Không thể tạo thư mục lưu ảnh.';
+
+    $this->redirect(
+        'admin/tours/'
+        . $tourId
+        . '/images'
+    );
+}
+
+if (!is_writable($uploadDirectory)) {
+    $_SESSION['admin_tour_image_error'] =
+        'Thư mục lưu ảnh không có quyền ghi.';
+
+    $this->redirect(
+        'admin/tours/'
+        . $tourId
+        . '/images'
+    );
+}
 
         $allowedTypes = [
             IMAGETYPE_JPEG => 'jpg',
@@ -973,6 +995,21 @@ class AdminTourController extends AdminBaseController
                     getimagesize(
                         $file['tmp_name']
                     );
+
+                $imageWidth =
+    (int) $imageInfo[0];
+
+$imageHeight =
+    (int) $imageInfo[1];
+
+if (
+    $imageWidth > 8000
+    || $imageHeight > 8000
+) {
+    throw new RuntimeException(
+        'Kích thước ảnh quá lớn.'
+    );
+}
 
                 if ($imageInfo === false) {
                     throw new RuntimeException(
@@ -1356,6 +1393,7 @@ class AdminTourController extends AdminBaseController
         $tourModel =
             new AdminTour();
 
+
         $tour =
             $tourModel->findById(
                 $tourId
@@ -1638,7 +1676,7 @@ class AdminTourController extends AdminBaseController
             $_SESSION[
                 'admin_tour_schedule_error'
             ] =
-                'Không thể cập nhật lịch trình.';
+                $error->getMessage();
         }
 
         $this->redirect(

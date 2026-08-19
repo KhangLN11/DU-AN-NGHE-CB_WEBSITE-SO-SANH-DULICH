@@ -5,7 +5,7 @@
             <span class="logo-icon">T</span>
 
             <span class="logo-text">
-                TourCompare
+                VivuTourViet
             </span>
         </a>
 
