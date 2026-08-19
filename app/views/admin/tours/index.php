@@ -30,7 +30,7 @@ $hasFilters =
 
             <p>
                 Xem và quản lý toàn bộ Tour
-                trong hệ thống TourCompare.
+                trong hệ thống VivuTourViet.
             </p>
 
         </div>

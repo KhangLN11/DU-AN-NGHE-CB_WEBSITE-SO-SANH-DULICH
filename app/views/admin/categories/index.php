@@ -14,7 +14,7 @@
 
             <p>
                 Quản lý các nhóm Tour đang được sử dụng
-                trên hệ thống TourCompare.
+                trên hệ thống VivuTourViet.
             </p>
 
         </div>

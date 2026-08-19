@@ -14,7 +14,7 @@
 
             <p>
                 Theo dõi nhanh dữ liệu
-                và hoạt động của TourCompare.
+                và hoạt động của VivuTourViet.
             </p>
 
         </div>
@@ -40,7 +40,7 @@
 
             <p>
                 Dưới đây là tình hình hiện tại
-                của hệ thống TourCompare.
+                của hệ thống VivuTourViet.
             </p>
 
         </div>

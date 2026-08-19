@@ -71,7 +71,7 @@ $currentPath = parse_url(
             <div class="admin-brand">
 
                 <a href="<?= base_url('admin') ?>">
-                    TourCompare
+                    VivuTourViet
                 </a>
 
                 <span>
