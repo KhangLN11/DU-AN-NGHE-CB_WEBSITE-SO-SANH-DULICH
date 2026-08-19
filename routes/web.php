@@ -169,3 +169,38 @@ $router->post(
     '/admin/tours/{id}/schedules',
     ['AdminTourController', 'updateSchedules']
 );
+
+$router->get(
+    '/admin/categories',
+    ['AdminCategoryController', 'index']
+);
+
+$router->get(
+    '/admin/categories/create',
+    ['AdminCategoryController', 'create']
+);
+
+$router->post(
+    '/admin/categories/create',
+    ['AdminCategoryController', 'store']
+);
+
+$router->get(
+    '/admin/categories/{id}/edit',
+    ['AdminCategoryController', 'edit']
+);
+
+$router->post(
+    '/admin/categories/{id}/edit',
+    ['AdminCategoryController', 'update']
+);
+
+$router->post(
+    '/admin/categories/{id}/delete',
+    ['AdminCategoryController', 'delete']
+);
+
+$router->post(
+    '/admin/categories/{id}/disable',
+    ['AdminCategoryController', 'disable']
+);

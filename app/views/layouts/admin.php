@@ -108,9 +108,9 @@ $currentPath = parse_url(
                     Tour
                 </a>
 
-                <span>
+                <a href="<?= base_url( 'admin/categories') ?>">
                     Danh mục
-                </span>
+                </a>
 
                 <span>
                     Công ty
