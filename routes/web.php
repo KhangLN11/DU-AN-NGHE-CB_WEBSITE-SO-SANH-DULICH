@@ -239,3 +239,8 @@ $router->post(
     '/admin/companies/{id}/delete',
     ['AdminCompanyController', 'delete']
 );
+
+$router->get(
+    '/admin/locations',
+    ['AdminLocationController', 'index']
+);

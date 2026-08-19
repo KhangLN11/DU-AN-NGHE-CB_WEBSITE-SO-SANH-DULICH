@@ -1,0 +1,451 @@
+.admin-location-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.admin-location-create {
+    display: inline-flex;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    border-radius: 9px;
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-location-create.disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.admin-location-alert {
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.admin-location-alert.success {
+    border: 1px solid #a7f3d0;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.admin-location-alert.error {
+    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.admin-location-toolbar {
+    margin-bottom: 18px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.admin-location-toolbar form {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.admin-location-search,
+.admin-location-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.admin-location-search {
+    flex: 1;
+}
+
+.admin-location-filter {
+    width: 165px;
+}
+
+.admin-location-search label,
+.admin-location-filter label {
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-location-search input,
+.admin-location-filter select {
+    width: 100%;
+    height: 40px;
+    padding: 0 11px;
+    border: 1px solid #dbe2ea;
+    border-radius: 8px;
+    outline: 0;
+    background: #ffffff;
+    color: #334155;
+    font-size: 10px;
+}
+
+.admin-location-search input:focus,
+.admin-location-filter select:focus {
+    border-color: #14b8a6;
+    box-shadow:
+        0 0 0 3px
+        rgba(20, 184, 166, 0.1);
+}
+
+.admin-location-toolbar button,
+.admin-location-reset {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-location-toolbar button {
+    border: 0;
+    background: #0f766e;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.admin-location-reset {
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    color: #64748b;
+}
+
+.admin-location-list-card {
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.admin-location-list-heading {
+    padding: 18px 20px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-location-list-heading > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-location-list-heading span {
+    color: #94a3b8;
+    font-size: 8px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.admin-location-list-heading strong {
+    margin-top: 2px;
+    color: #334155;
+    font-size: 12px;
+}
+
+.admin-location-table-wrapper {
+    overflow-x: auto;
+}
+
+.admin-location-table {
+    width: 100%;
+    min-width: 1180px;
+    border-collapse: collapse;
+}
+
+.admin-location-table th {
+    padding: 12px 14px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 8px;
+    font-weight: 800;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.admin-location-table td {
+    padding: 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #475569;
+    font-size: 10px;
+    vertical-align: middle;
+}
+
+.admin-location-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.admin-location-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.location-id {
+    color: #94a3b8;
+    font-weight: 700;
+}
+
+.location-main {
+    display: flex;
+    min-width: 200px;
+    align-items: center;
+    gap: 11px;
+}
+
+.location-image {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-weight: 800;
+}
+
+.location-image img {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.location-main-content {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.location-main-content strong {
+    color: #111827;
+    font-size: 11px;
+}
+
+.location-main-content code {
+    color: #94a3b8;
+    font-size: 8px;
+}
+
+.location-region {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.location-region strong {
+    color: #334155;
+    font-size: 9px;
+}
+
+.location-region span {
+    color: #94a3b8;
+    font-size: 8px;
+}
+
+.location-coordinate {
+    display: flex;
+    min-width: 105px;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.location-coordinate span,
+.location-coordinate small {
+    font-size: 8px;
+}
+
+.location-coordinate span {
+    color: #334155;
+}
+
+.location-coordinate small {
+    color: #94a3b8;
+}
+
+.location-muted {
+    color: #cbd5e1;
+    font-size: 8px;
+}
+
+.location-use-count {
+    display: inline-flex;
+    min-width: 32px;
+    min-height: 28px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border-radius: 8px;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.location-use-count.departure {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.location-use-count.destination {
+    background: #f0fdfa;
+    color: #0f766e;
+}
+
+.location-status {
+    display: inline-flex;
+    min-height: 28px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 9px;
+    border-radius: 999px;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.location-status.active {
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.location-status.inactive {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.location-date {
+    color: #64748b;
+    font-size: 9px;
+}
+
+.admin-location-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.location-action {
+    display: inline-flex;
+    min-height: 30px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 9px;
+    border-radius: 7px;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.location-action.edit {
+    background: #eff6ff;
+    color: #1d4ed8;
+}
+
+.location-action.delete {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.location-action.disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.admin-location-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 18px 20px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.admin-location-pagination a {
+    display: inline-flex;
+    min-width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #64748b;
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.admin-location-pagination a.active {
+    border-color: #0f766e;
+    background: #0f766e;
+    color: #ffffff;
+}
+
+.admin-location-empty {
+    padding: 70px 25px;
+    text-align: center;
+}
+
+.admin-location-empty > div {
+    display: flex;
+    width: 56px;
+    height: 56px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    border-radius: 14px;
+    background: #ccfbf1;
+    color: #0f766e;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.admin-location-empty h3 {
+    margin-bottom: 4px;
+    color: #111827;
+    font-size: 14px;
+}
+
+.admin-location-empty p {
+    color: #94a3b8;
+    font-size: 9px;
+}
+
+@media (max-width: 900px) {
+    .admin-location-toolbar form {
+        flex-wrap: wrap;
+    }
+
+    .admin-location-search {
+        flex-basis: 100%;
+    }
+}
+
+@media (max-width: 720px) {
+    .admin-location-heading,
+    .admin-location-toolbar form {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .admin-location-create,
+    .admin-location-filter,
+    .admin-location-toolbar button,
+    .admin-location-reset {
+        width: 100%;
+    }
+}
