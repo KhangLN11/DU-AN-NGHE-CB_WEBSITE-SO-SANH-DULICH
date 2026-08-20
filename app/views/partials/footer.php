@@ -5,7 +5,13 @@
         <div class="footer-column footer-brand">
 
             <a class="site-logo footer-logo" href="<?= base_url() ?>">
-                <span class="logo-icon">T</span>
+                <img
+                class="site-logo-image"
+                src="<?= asset(
+                    'images/logo.png'
+                ) ?>"
+                alt="VivuTourViet"
+            >
 
                 <span class="logo-text">
                     VivuTourViet

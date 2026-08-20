@@ -16,9 +16,11 @@
             </h1>
 
             <p>
-                Khám phá, tìm kiếm và so sánh các tour du lịch
-                từ nhiều đơn vị lữ hành trên cùng một nền tảng.
+                Khám phá, tìm kiếm và so sánh Tour
+                từ nhiều đơn vị lữ hành trên cùng
+                một nền tảng.
             </p>
+
 
             <form
                 class="hero-search"
@@ -42,53 +44,162 @@
                 </div>
 
                 <button type="submit">
-                    Tìm tour
+                    Tìm Tour
                 </button>
 
             </form>
 
-            <div class="hero-suggestions">
 
-                <span>Gợi ý:</span>
+            <?php if (!empty($heroSuggestions)): ?>
 
-                <a href="<?= base_url('tours?keyword=Đà Lạt') ?>">
-                    Đà Lạt
-                </a>
+                <div class="hero-suggestions">
 
-                <a href="<?= base_url('tours?keyword=Đà Nẵng') ?>">
-                    Đà Nẵng
-                </a>
+                    <span>
+                        Gợi ý:
+                    </span>
 
-                <a href="<?= base_url('tours?keyword=Phú Quốc') ?>">
-                    Phú Quốc
-                </a>
+                    <?php foreach (
+                        $heroSuggestions
+                        as $suggestion
+                    ): ?>
 
-            </div>
+                        <a
+                            href="<?= base_url(
+                                'destinations/'
+                                . $suggestion['slug']
+                            ) ?>"
+                        >
+                            <?= e(
+                                $suggestion[
+                                    'location_name'
+                                ]
+                            ) ?>
+                        </a>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+            <?php endif; ?>
 
         </div>
 
+
         <div class="hero-visual">
 
-            <div class="hero-card hero-card-main">
+            <?php if ($heroLocation): ?>
 
-                <span class="hero-card-label">
-                    Điểm đến nổi bật
-                </span>
+                <a
+                    class="hero-card hero-card-main"
+                    href="<?= base_url(
+                        'destinations/'
+                        . $heroLocation['slug']
+                    ) ?>"
+                >
 
-                <strong>
-                    Đà Lạt
-                </strong>
+                    <div class="hero-location-placeholder">
 
-                <span>
-                    Thành phố ngàn hoa
-                </span>
+                        <?= e(
+                            mb_substr(
+                                $heroLocation[
+                                    'location_name'
+                                ],
+                                0,
+                                1
+                            )
+                        ) ?>
 
-            </div>
+                    </div>
+
+
+                    <?php if (
+                        !empty(
+                            $heroLocation['image']
+                        )
+                    ): ?>
+
+                        <img
+                            class="hero-location-image"
+                            src="<?= asset(
+                                ltrim(
+                                    $heroLocation['image'],
+                                    '/'
+                                )
+                            ) ?>"
+                            alt="<?= e(
+                                $heroLocation[
+                                    'location_name'
+                                ]
+                            ) ?>"
+                            onerror="this.style.display='none'"
+                        >
+
+                    <?php endif; ?>
+
+
+                    <div class="hero-card-overlay"></div>
+
+
+                    <div class="hero-card-content">
+
+                        <span class="hero-card-label">
+                            Điểm đến nổi bật
+                        </span>
+
+                        <strong>
+                            <?= e(
+                                $heroLocation[
+                                    'location_name'
+                                ]
+                            ) ?>
+                        </strong>
+
+                        <span>
+                            <?= e(
+                                $heroLocation[
+                                    'province_city'
+                                ]
+                                ?? $heroLocation[
+                                    'country'
+                                ]
+                            ) ?>
+                        </span>
+
+                    </div>
+
+                </a>
+
+            <?php else: ?>
+
+                <div class="hero-card hero-card-main">
+
+                    <div class="hero-card-content">
+
+                        <span class="hero-card-label">
+                            Điểm đến nổi bật
+                        </span>
+
+                        <strong>
+                            Việt Nam
+                        </strong>
+
+                        <span>
+                            Hành trình đang chờ bạn
+                        </span>
+
+                    </div>
+
+                </div>
+
+            <?php endif; ?>
+
 
             <div class="hero-stat hero-stat-left">
 
                 <strong>
-                    <?= count($featuredTours) ?>
+                    <?= count(
+                        $featuredTours
+                    ) ?>
                 </strong>
 
                 <span>
@@ -97,10 +208,13 @@
 
             </div>
 
+
             <div class="hero-stat hero-stat-right">
 
                 <strong>
-                    <?= count($popularLocations) ?>
+                    <?= count(
+                        $popularLocations
+                    ) ?>
                 </strong>
 
                 <span>
@@ -133,11 +247,13 @@
                 </h2>
 
                 <p>
-                    Những hành trình được lựa chọn để bạn
-                    dễ dàng bắt đầu chuyến đi.
+                    Những hành trình đáng chú ý từ
+                    nhiều đơn vị tổ chức để bạn dễ dàng
+                    bắt đầu chuyến đi.
                 </p>
 
             </div>
+
 
             <a
                 class="section-link"
@@ -152,80 +268,140 @@
 
         <?php if (!empty($featuredTours)): ?>
 
-            <div class="tour-grid">
+            <div class="tour-grid home-reveal">
 
-                <?php foreach ($featuredTours as $tour): ?>
+                <?php foreach (
+                    $featuredTours
+                    as $tour
+                ): ?>
 
                     <article class="tour-card">
 
                         <a
                             class="tour-card-image"
-                            href="<?= base_url('tours/' . $tour['tour_id']) ?>"
+                            href="<?= base_url(
+                                'tours/'
+                                . $tour['tour_id']
+                            ) ?>"
                         >
 
                             <div class="image-placeholder">
+
                                 <span>
-                                    <?= e(mb_substr($tour['tour_name'], 0, 1)) ?>
+                                    <?= e(
+                                        mb_substr(
+                                            $tour['tour_name'],
+                                            0,
+                                            1
+                                        )
+                                    ) ?>
                                 </span>
+
                             </div>
 
-                            <?php if (!empty($tour['image_url'])): ?>
+
+                            <?php if (
+                                !empty(
+                                    $tour['image_url']
+                                )
+                            ): ?>
 
                                 <img
-                                    src="<?= asset(ltrim($tour['image_url'], '/')) ?>"                                    
-                                    alt="<?= e($tour['tour_name']) ?>"
+                                    src="<?= asset(
+                                        ltrim(
+                                            $tour['image_url'],
+                                            '/'
+                                        )
+                                    ) ?>"
+                                    alt="<?= e(
+                                        $tour['tour_name']
+                                    ) ?>"
                                     loading="lazy"
                                     onerror="this.style.display='none'"
                                 >
 
                             <?php endif; ?>
 
+
                             <span class="tour-category">
-                                <?= e($tour['category_name']) ?>
+                                <?= e(
+                                    $tour['category_name']
+                                ) ?>
+                            </span>
+
+
+                            <span class="tour-featured-badge">
+                                Nổi bật
                             </span>
 
                         </a>
 
+
                         <div class="tour-card-content">
 
                             <div class="tour-company">
-                                <?= e($tour['company_name']) ?>
+                                <?= e(
+                                    $tour['company_name']
+                                ) ?>
                             </div>
+
 
                             <h3>
 
-                                <a href="<?= base_url('tours/' . $tour['tour_id']) ?>">
-                                    <?= e($tour['tour_name']) ?>
+                                <a
+                                    href="<?= base_url(
+                                        'tours/'
+                                        . $tour['tour_id']
+                                    ) ?>"
+                                >
+                                    <?= e(
+                                        $tour['tour_name']
+                                    ) ?>
                                 </a>
 
                             </h3>
 
+
                             <p class="tour-description">
-                                <?= e($tour['short_description']) ?>
+                                <?= e(
+                                    $tour[
+                                        'short_description'
+                                    ]
+                                    ?? 'Khám phá hành trình và những trải nghiệm đáng nhớ.'
+                                ) ?>
                             </p>
+
 
                             <div class="tour-meta">
 
                                 <span>
-                                    <?= (int) $tour['duration_days'] ?>
+                                    <?= (int)
+                                    $tour[
+                                        'duration_days'
+                                    ] ?>
                                     ngày
-                                    <?= (int) $tour['duration_nights'] ?>
+                                    <?= (int)
+                                    $tour[
+                                        'duration_nights'
+                                    ] ?>
                                     đêm
                                 </span>
 
                             </div>
+
 
                             <div class="tour-card-footer">
 
                                 <div class="tour-price">
 
                                     <span>
-                                        Từ
+                                        Giá tham khảo
                                     </span>
 
                                     <strong>
                                         <?= number_format(
-                                            (float) $tour['price'],
+                                            (float)
+                                            $tour['price'],
                                             0,
                                             ',',
                                             '.'
@@ -235,10 +411,16 @@
 
                                 </div>
 
+
                                 <a
                                     class="tour-detail-button"
-                                    href="<?= base_url('tours/' . $tour['tour_id']) ?>"
-                                    aria-label="Xem chi tiết <?= e($tour['tour_name']) ?>"
+                                    href="<?= base_url(
+                                        'tours/'
+                                        . $tour['tour_id']
+                                    ) ?>"
+                                    aria-label="Xem chi tiết <?= e(
+                                        $tour['tour_name']
+                                    ) ?>"
                                 >
                                     →
                                 </a>
@@ -256,7 +438,7 @@
         <?php else: ?>
 
             <div class="empty-state">
-                Chưa có tour nổi bật.
+                Chưa có Tour nổi bật.
             </div>
 
         <?php endif; ?>
@@ -283,15 +465,19 @@
                 </h2>
 
                 <p>
-                    Khám phá những điểm đến đang xuất hiện
-                    trong nhiều hành trình của hệ thống.
+                    Khám phá những nơi xuất hiện
+                    trong nhiều hành trình nổi bật
+                    trên VivuTourViet.
                 </p>
 
             </div>
 
+
             <a
                 class="section-link"
-                href="<?= base_url('destinations') ?>"
+                href="<?= base_url(
+                    'destinations'
+                ) ?>"
             >
                 Khám phá thêm
                 <span>→</span>
@@ -300,38 +486,64 @@
         </div>
 
 
-        <?php if (!empty($popularLocations)): ?>
+        <?php if (
+            !empty(
+                $popularLocations
+            )
+        ): ?>
 
-            <div class="destination-grid">
+            <div class="destination-grid home-reveal">
 
-                <?php foreach ($popularLocations as $location): ?>
+                <?php foreach (
+                    $popularLocations
+                    as $index => $location
+                ): ?>
 
                     <a
-                        class="destination-card"
+                        class="destination-card <?= $index === 0
+                            ? 'destination-card-featured'
+                            : '' ?>"
                         href="<?= base_url(
-                            'tours?location=' . $location['location_id']
+                            'destinations/'
+                            . $location['slug']
                         ) ?>"
                     >
 
                         <div class="destination-image">
 
                             <div class="destination-placeholder">
+
                                 <?= e(
                                     mb_substr(
-                                        $location['location_name'],
+                                        $location[
+                                            'location_name'
+                                        ],
                                         0,
                                         1
                                     )
                                 ) ?>
+
                             </div>
 
-                            <?php if (!empty($location['image'])): ?>
+
+                            <?php if (
+                                !empty(
+                                    $location['image']
+                                )
+                            ): ?>
 
                                 <img
                                     src="<?= asset(
-                                        ltrim($location['image'], '/')
+                                        ltrim(
+                                            $location['image'],
+                                            '/'
+                                        )
                                     ) ?>"
-                                    alt="<?= e($location['location_name']) ?>"
+                                    alt="<?= e(
+                                        $location[
+                                            'location_name'
+                                        ]
+                                    ) ?>"
                                     loading="lazy"
                                     onerror="this.style.display='none'"
                                 >
@@ -340,18 +552,48 @@
 
                         </div>
 
+
                         <div class="destination-overlay"></div>
+
 
                         <div class="destination-content">
 
+                            <span class="destination-location">
+                                <?= e(
+                                    $location[
+                                        'province_city'
+                                    ]
+                                    ?? $location[
+                                        'country'
+                                    ]
+                                ) ?>
+                            </span>
+
+
                             <h3>
-                                <?= e($location['location_name']) ?>
+                                <?= e(
+                                    $location[
+                                        'location_name'
+                                    ]
+                                ) ?>
                             </h3>
 
-                            <span>
-                                <?= (int) $location['tour_count'] ?>
-                                tour
-                            </span>
+
+                            <div class="destination-footer">
+
+                                <span>
+                                    <?= (int)
+                                    $location[
+                                        'tour_count'
+                                    ] ?>
+                                    Tour
+                                </span>
+
+                                <strong>
+                                    Khám phá →
+                                </strong>
+
+                            </div>
 
                         </div>
 
@@ -361,7 +603,96 @@
 
             </div>
 
+        <?php else: ?>
+
+            <div class="empty-state">
+                Chưa có điểm đến nổi bật.
+            </div>
+
         <?php endif; ?>
+
+    </div>
+
+</section>
+
+
+<section class="home-benefits">
+
+    <div class="page-container">
+
+        <div class="benefit-heading">
+
+            <span class="section-label">
+                VivuTourViet
+            </span>
+
+            <h2>
+                Một nơi để khám phá,
+                so sánh và lựa chọn
+            </h2>
+
+        </div>
+
+
+        <div class="benefit-grid home-reveal">
+
+            <article class="benefit-card">
+
+                <span class="benefit-number">
+                    01
+                </span>
+
+                <h3>
+                    Nhiều hành trình
+                </h3>
+
+                <p>
+                    Khám phá Tour từ nhiều
+                    đơn vị lữ hành trên cùng
+                    một hệ thống.
+                </p>
+
+            </article>
+
+
+            <article class="benefit-card">
+
+                <span class="benefit-number">
+                    02
+                </span>
+
+                <h3>
+                    So sánh dễ dàng
+                </h3>
+
+                <p>
+                    Đặt các Tour cạnh nhau để
+                    xem giá, thời lượng và hành trình
+                    trước khi lựa chọn.
+                </p>
+
+            </article>
+
+
+            <article class="benefit-card">
+
+                <span class="benefit-number">
+                    03
+                </span>
+
+                <h3>
+                    Thông tin tập trung
+                </h3>
+
+                <p>
+                    Điểm đến, lịch trình,
+                    công ty và giá tham khảo
+                    được trình bày rõ ràng.
+                </p>
+
+            </article>
+
+        </div>
 
     </div>
 
@@ -385,8 +716,9 @@
                 </h2>
 
                 <p>
-                    Tìm tour phù hợp với phong cách
-                    du lịch mà bạn yêu thích.
+                    Tìm Tour phù hợp với
+                    phong cách du lịch mà
+                    bạn yêu thích.
                 </p>
 
             </div>
@@ -394,49 +726,83 @@
         </div>
 
 
-        <div class="category-grid">
+        <?php if (!empty($categories)): ?>
 
-            <?php foreach ($categories as $category): ?>
+            <div class="category-grid home-reveal">
 
-                <a
-                    class="category-card"
-                    href="<?= base_url(
-                        'tours?category=' . $category['category_id']
-                    ) ?>"
-                >
+                <?php foreach (
+                    $categories
+                    as $category
+                ): ?>
 
-                    <div class="category-icon">
-                        <?= e(
-                            mb_substr(
-                                $category['category_name'],
-                                0,
-                                1
-                            )
-                        ) ?>
-                    </div>
+                    <a
+                        class="category-card"
+                        href="<?= base_url(
+                            'tours?category='
+                            . $category[
+                                'category_id'
+                            ]
+                        ) ?>"
+                    >
 
-                    <div class="category-content">
+                        <div class="category-icon">
 
-                        <h3>
-                            <?= e($category['category_name']) ?>
-                        </h3>
+                            <?= e(
+                                mb_substr(
+                                    $category[
+                                        'category_name'
+                                    ],
+                                    0,
+                                    1
+                                )
+                            ) ?>
 
-                        <p>
-                            <?= e($category['description']) ?>
-                        </p>
+                        </div>
 
-                        <span>
-                            <?= (int) $category['tour_count'] ?>
-                            tour
+
+                        <div class="category-content">
+
+                            <h3>
+                                <?= e(
+                                    $category[
+                                        'category_name'
+                                    ]
+                                ) ?>
+                            </h3>
+
+
+                            <p>
+                                <?= e(
+                                    $category[
+                                        'description'
+                                    ]
+                                    ?? 'Khám phá các hành trình phù hợp với sở thích của bạn.'
+                                ) ?>
+                            </p>
+
+
+                            <span>
+                                <?= (int)
+                                $category[
+                                    'tour_count'
+                                ] ?>
+                                Tour
+                            </span>
+
+                        </div>
+
+
+                        <span class="category-arrow">
+                            →
                         </span>
 
-                    </div>
+                    </a>
 
-                </a>
+                <?php endforeach; ?>
 
-            <?php endforeach; ?>
+            </div>
 
-        </div>
+        <?php endif; ?>
 
     </div>
 
@@ -449,26 +815,34 @@
 
         <div class="cta-container">
 
+            <div class="cta-decoration"></div>
+
+
             <div class="cta-content">
 
                 <span>
-                    Chưa biết chọn tour nào?
+                    Chưa biết chọn Tour nào?
                 </span>
 
                 <h2>
-                    So sánh để tìm hành trình phù hợp nhất
+                    So sánh để tìm hành trình
+                    phù hợp nhất
                 </h2>
 
                 <p>
-                    Chọn từ 2 đến 3 tour và đặt các thông tin
-                    quan trọng cạnh nhau để đưa ra lựa chọn dễ dàng hơn.
+                    Chọn từ 2 đến 3 Tour và đặt
+                    các thông tin quan trọng cạnh nhau
+                    để đưa ra lựa chọn dễ dàng hơn.
                 </p>
 
             </div>
 
+
             <a
                 class="cta-button"
-                href="<?= base_url('compare') ?>"
+                href="<?= base_url(
+                    'compare'
+                ) ?>"
             >
                 Bắt đầu so sánh
                 <span>→</span>

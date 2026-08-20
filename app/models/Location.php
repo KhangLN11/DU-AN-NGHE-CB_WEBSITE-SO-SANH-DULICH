@@ -12,7 +12,7 @@ class Location extends Model
                 l.province_city,
                 l.country,
                 l.image,
-                COUNT(DISTINCT tl.tour_id) AS tour_count
+                COUNT(DISTINCT t.tour_id) AS tour_count
             FROM locations l
             INNER JOIN tour_locations tl
                 ON l.location_id = tl.location_id
