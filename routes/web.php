@@ -294,3 +294,33 @@ $router->post(
     '/admin/users/{id}/delete',
     ['AdminUserController', 'delete']
 );
+
+$router->get(
+    '/admin/contacts',
+    ['AdminContactController', 'index']
+);
+
+$router->get(
+    '/admin/contacts/{id}',
+    ['AdminContactController', 'detail']
+);
+
+$router->post(
+    '/admin/contacts/{id}/manage',
+    ['AdminContactController', 'updateManagement']
+);
+
+$router->post(
+    '/admin/contacts/{id}/delete',
+    ['AdminContactController', 'delete']
+);
+
+$router->get(
+    '/destinations',
+    ['DestinationController', 'index']
+);
+
+$router->get(
+    '/destinations/{slug}',
+    ['DestinationController', 'show']
+);

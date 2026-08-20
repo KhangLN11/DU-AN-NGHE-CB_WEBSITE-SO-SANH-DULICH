@@ -15,7 +15,7 @@
             <p>
                 Theo dõi tài khoản,
                 vai trò và trạng thái người dùng
-                trên TourCompare.
+                trên VivuTourViet.
             </p>
 
         </div>

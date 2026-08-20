@@ -124,9 +124,9 @@ $currentPath = parse_url(
                     Người dùng
                 </a>
 
-                <span>
+                <a href="<?= base_url('admin/contacts') ?>">
                     Liên hệ
-                </span>
+                </a>
 
             </nav>
 

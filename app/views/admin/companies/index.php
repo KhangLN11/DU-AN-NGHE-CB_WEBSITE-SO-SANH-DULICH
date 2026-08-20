@@ -14,7 +14,7 @@
 
             <p>
                 Quản lý các đơn vị lữ hành
-                và nhà cung cấp Tour trên TourCompare.
+                và nhà cung cấp Tour trên VivuTourViet.
             </p>
 
         </div>
