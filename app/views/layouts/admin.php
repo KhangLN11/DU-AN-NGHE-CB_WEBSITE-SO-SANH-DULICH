@@ -120,9 +120,9 @@ $currentPath = parse_url(
                     Địa điểm
                 </a>
 
-                <span>
+                <a href="<?= base_url('admin/users') ?>">
                     Người dùng
-                </span>
+                </a>
 
                 <span>
                     Liên hệ

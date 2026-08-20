@@ -274,3 +274,23 @@ $router->post(
     '/admin/locations/{id}/delete',
     ['AdminLocationController', 'delete']
 );
+
+$router->get(
+    '/admin/users',
+    ['AdminUserController', 'index']
+);
+
+$router->get(
+    '/admin/users/{id}',
+    ['AdminUserController', 'detail']
+);
+
+$router->post(
+    '/admin/users/{id}/status',
+    ['AdminUserController', 'changeStatus']
+);
+
+$router->post(
+    '/admin/users/{id}/delete',
+    ['AdminUserController', 'delete']
+);
