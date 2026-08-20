@@ -244,3 +244,33 @@ $router->get(
     '/admin/locations',
     ['AdminLocationController', 'index']
 );
+
+$router->get(
+    '/admin/locations/create',
+    ['AdminLocationController', 'create']
+);
+
+$router->post(
+    '/admin/locations/create',
+    ['AdminLocationController', 'store']
+);
+
+$router->get(
+    '/admin/locations/{id}/edit',
+    ['AdminLocationController', 'edit']
+);
+
+$router->post(
+    '/admin/locations/{id}/edit',
+    ['AdminLocationController', 'update']
+);
+
+$router->post(
+    '/admin/locations/{id}/disable',
+    ['AdminLocationController', 'disable']
+);
+
+$router->post(
+    '/admin/locations/{id}/delete',
+    ['AdminLocationController', 'delete']
+);

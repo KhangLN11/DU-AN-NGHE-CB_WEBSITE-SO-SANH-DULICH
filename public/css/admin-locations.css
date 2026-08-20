@@ -449,3 +449,38 @@
         width: 100%;
     }
 }
+
+.admin-location-actions form {
+    margin: 0;
+}
+
+.location-action {
+    border: 0;
+    font-family: inherit;
+}
+
+button.location-action {
+    cursor: pointer;
+}
+
+.location-action.disable {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.location-action.disable:hover {
+    background: #ffedd5;
+}
+
+.location-action.delete:hover {
+    background: #fee2e2;
+}
+
+.location-action.locked {
+    opacity: 0.35;
+    cursor: not-allowed;
+}
+
+.location-action.locked:hover {
+    background: #fef2f2;
+}

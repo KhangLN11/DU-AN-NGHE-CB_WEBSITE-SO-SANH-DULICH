@@ -15,14 +15,14 @@
             <p>
                 Quản lý điểm khởi hành,
                 điểm đến và dữ liệu bản đồ
-                của TourCompare.
+                của VivuTourViet.
             </p>
 
         </div>
 
-        <span class="admin-location-create disabled">
+        <a class="admin-location-create" href="<?= base_url( 'admin/locations/create' ) ?>" >
             + Thêm địa điểm
-        </span>
+        </a>
 
     </div>
 
@@ -476,19 +476,113 @@
 
                                     <div class="admin-location-actions">
 
-                                        <span
-                                            class="location-action edit disabled"
-                                        >
-                                            Sửa
-                                        </span>
+    <a
+        class="location-action edit"
+        href="<?= base_url(
+            'admin/locations/'
+            . $location[
+                'location_id'
+            ]
+            . '/edit'
+        ) ?>"
+    >
+        Sửa
+    </a>
 
-                                        <span
-                                            class="location-action delete disabled"
-                                        >
-                                            Xóa
-                                        </span>
 
-                                    </div>
+    <?php if (
+        $location['status']
+        === 'active'
+    ): ?>
+
+        <form
+            action="<?= base_url(
+                'admin/locations/'
+                . $location[
+                    'location_id'
+                ]
+                . '/disable'
+            ) ?>"
+            method="POST"
+            onsubmit="return confirm(
+                'Bạn có chắc muốn tạm ẩn địa điểm này?'
+            );"
+        >
+
+            <button
+                class="location-action disable"
+                type="submit"
+            >
+                Tạm ẩn
+            </button>
+
+        </form>
+
+    <?php endif; ?>
+
+
+    <?php
+
+    $departureCount =
+        (int) $location[
+            'departure_tour_count'
+        ];
+
+    $destinationCount =
+        (int) $location[
+            'destination_tour_count'
+        ];
+
+    $isInUse =
+        $departureCount > 0
+        || $destinationCount > 0;
+
+    ?>
+
+
+    <?php if (!$isInUse): ?>
+
+        <form
+            action="<?= base_url(
+                'admin/locations/'
+                . $location[
+                    'location_id'
+                ]
+                . '/delete'
+            ) ?>"
+            method="POST"
+            onsubmit="return confirm(
+                'Bạn có chắc muốn xóa vĩnh viễn địa điểm này? Hành động này không thể hoàn tác.'
+            );"
+        >
+
+            <button
+                class="location-action delete"
+                type="submit"
+            >
+                Xóa
+            </button>
+
+        </form>
+
+    <?php else: ?>
+
+        <span
+            class="location-action delete locked"
+            title="<?= e(
+                'Đang được sử dụng: '
+                . $departureCount
+                . ' Tour khởi hành, '
+                . $destinationCount
+                . ' lượt điểm đến'
+            ) ?>"
+        >
+            Xóa
+        </span>
+
+    <?php endif; ?>
+
+</div>
 
                                 </td>
 
